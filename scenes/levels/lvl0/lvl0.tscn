@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2frkupo5c8pm"]
+
+[ext_resource type="PackedScene" uid="uid://vx3r0epkqc2c" path="res://scenes/player/player.tscn" id="2_6s3t3"]
+[ext_resource type="PackedScene" uid="uid://cgkao7tgcqcdo" path="res://scenes/levels/lvl0/world.blend" id="2_7m24u"]
+
+[sub_resource type="Environment" id="Environment_gmvwj"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_qkd5t"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_gmvwj")
+camera_attributes = SubResource("CameraAttributesPhysical_qkd5t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.811258, 0.584689, 0, -0.584689, -0.811258, 0, 93.1905, -124.886)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_6s3t3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="world" parent="." instance=ExtResource("2_7m24u")]

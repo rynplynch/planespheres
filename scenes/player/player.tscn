@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://vx3r0epkqc2c"]
+
+[ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_8abe8"]
+[ext_resource type="PackedScene" uid="uid://he0aom0e0kug" path="res://scenes/player/sphere.blend" id="2_y64gq"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_8abe8")
+
+[node name="CameraTarget" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraTarget"]
+spring_length = -3.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraTarget/SpringArm3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -3)
+
+[node name="sphere" parent="." instance=ExtResource("2_y64gq")]
