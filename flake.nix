@@ -4,10 +4,9 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-23.05";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, flake-utils }@inputs:
+  outputs = { self, nixpkgs, flake-utils }@inputs:
     flake-utils.lib.eachDefaultSystem
       (system:
         let
