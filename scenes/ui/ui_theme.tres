@@ -1,0 +1,34 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bp3adufn8nqnk"]
+
+[ext_resource type="FontFile" uid="uid://df73sjla88t3y" path="res://scenes/ui/font/Roboto-Medium.ttf" id="1_8vd2a"]
+[ext_resource type="FontFile" uid="uid://bhs5gxdk0gogh" path="res://scenes/ui/font/Roboto-Regular.ttf" id="2_fqvjg"]
+[ext_resource type="FontFile" uid="uid://1ye2101oqet1" path="res://scenes/ui/font/Roboto-Bold.ttf" id="3_i378m"]
+[ext_resource type="FontFile" uid="uid://b1mdfcn1a4lq6" path="res://scenes/ui/font/Roboto-MediumItalic.ttf" id="3_k1kvj"]
+[ext_resource type="FontFile" uid="uid://cuonpnbtpols6" path="res://scenes/ui/font/Roboto-BlackItalic.ttf" id="4_ocy0w"]
+
+[resource]
+Fonts/font_sizes/large = 100
+Fonts/font_sizes/normal = 30
+Fonts/fonts/large = ExtResource("1_8vd2a")
+Fonts/fonts/normal = ExtResource("2_fqvjg")
+HeaderLarge/base_type = &"Label"
+HeaderLarge/colors/font_color = Color(0.792157, 0.486275, 0.533333, 1)
+HeaderLarge/colors/font_outline_color = Color(0, 0, 0, 1)
+HeaderLarge/font_sizes/font_size = 100
+HeaderLarge/fonts/font = null
+HeaderSmall/base_type = &"Label"
+HeaderSmall/colors/font_color = Color(0.881072, 0.881072, 0.881072, 1)
+HeaderSmall/font_sizes/font_size = 30
+HeaderSmall/fonts/font = ExtResource("3_k1kvj")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 100
+Label/fonts/font = ExtResource("3_i378m")
+LinkButton/font_sizes/font_size = 25
+LinkButton/fonts/font = ExtResource("4_ocy0w")
+MenuButton/colors/font_color = Color(0, 0, 0, 1)
+MenuButton/font_sizes/font_size = 40
+MenuButton/fonts/font = ExtResource("2_fqvjg")
+TooltipLabel/base_type = &"Label"
+TooltipLabel/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+TooltipLabel/font_sizes/font_size = 25
+TooltipLabel/fonts/font = ExtResource("2_fqvjg")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv262nrcdvjc3"]
+
+[ext_resource type="Script" path="res://scenes/levels/client/client_script.gd" id="1_h0scu"]
+
+[node name="ClientScene" type="Node2D"]
+script = ExtResource("1_h0scu")
+
+[node name="ScreenName" type="Label" parent="."]
+offset_left = 307.0
+offset_top = 188.0
+offset_right = 347.0
+offset_bottom = 211.0
+text = "ALSKDJASLKD"
+
+[node name="SessionToken" type="Label" parent="."]
+offset_left = 375.0
+offset_top = 95.0
+offset_right = 415.0
+offset_bottom = 118.0
+text = "HHHHH"

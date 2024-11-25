@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://vx3r0epkqc2c"]
+
+[ext_resource type="Script" path="res://scenes/player/player_script.gd" id="1_8abe8"]
+[ext_resource type="PackedScene" uid="uid://he0aom0e0kug" path="res://scenes/player/player_model.blend" id="2_y64gq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6oil3"]
+friction = 0.5
+rough = true
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_8abe8")
+
+[node name="CameraTarget" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraTarget"]
+spring_length = -3.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraTarget/SpringArm3D"]
+
+[node name="sphere" parent="." instance=ExtResource("2_y64gq")]
+
+[node name="Sphere-rigid" parent="sphere" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_6oil3")
+
+[editable path="sphere"]

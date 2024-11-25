@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2r1quhlp637h"]
+
+[ext_resource type="Script" path="res://scenes/levels/lobby/lobby_script.gd" id="1_7pjew"]
+[ext_resource type="PackedScene" uid="uid://he0aom0e0kug" path="res://scenes/player/player_model.blend" id="3_dvo0c"]
+[ext_resource type="PackedScene" uid="uid://c7tkimfmgrkov" path="res://scenes/ui/main-menu/main_scene.tscn" id="4_ba685"]
+[ext_resource type="PackedScene" uid="uid://dyhejc78gxoi" path="res://scenes/levels/lvl0/world.new.blend" id="4_g2xyw"]
+
+[node name="WorldEnvironment" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.47771, 0)
+script = ExtResource("1_7pjew")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.811258, 0.584689, 0, -0.584689, -0.811258, 0, 93.1905, -124.886)
+shadow_enabled = true
+
+[node name="CameraTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1059, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraTarget"]
+spring_length = -3.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraTarget/SpringArm3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -3)
+current = true
+
+[node name="player_model" parent="." instance=ExtResource("3_dvo0c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="MainMenu" parent="." instance=ExtResource("4_ba685")]
+
+[node name="world_new" parent="." instance=ExtResource("4_g2xyw")]
+
+[editable path="player_model"]
+[editable path="MainMenu"]
