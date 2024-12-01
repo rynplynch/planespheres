@@ -1,22 +1,21 @@
-{ lib
-, stdenv
-, mkGodot
-, copyDesktopItems
-, installShellFiles
-, autoPatchelfHook
-, xorg
-, vulkan-loader
-, libGL
-, libxkbcommon
-, alsa-lib
+{
+  lib,
+  stdenv,
+  mkGodot,
+  copyDesktopItems,
+  installShellFiles,
+  autoPatchelfHook,
+  xorg,
+  vulkan-loader,
+  libGL,
+  libxkbcommon,
+  alsa-lib,
+}: {
+  pname,
+  version,
+  src,
+  desktopItems ? [],
 }:
-
-{ pname
-, version
-, src
-, desktopItems ? [ ]
-}:
-
 stdenv.mkDerivation rec {
   inherit pname version src desktopItems;
 

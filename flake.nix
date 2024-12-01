@@ -6,56 +6,57 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, flake-utils }@inputs:
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+  } @ inputs:
     flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [ (import ./overlays.nix { inherit inputs; }) ];
-          };
+    (
+      system: let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [(import ./overlays.nix {inherit inputs;})];
+        };
 
-          version = "0.1.0";
+        version = "0.1.0";
+      in rec {
+        apps.nixos_template = flake-utils.lib.mkApp {
+          drv = self.packages.${system}.nixos_template;
+        };
 
-        in
-        rec {
-          apps.nixos_template = flake-utils.lib.mkApp {
-            drv = self.packages.${system}.nixos_template;
-          };
+        packages.default = packages.nixos_template;
 
-          packages.default = packages.nixos_template;
+        packages.nixos_template = pkgs.mkNixosPatch {
+          inherit version;
+          pname = "nixos_template";
+          src = packages.linux_template;
+        };
 
-          packages.nixos_template = pkgs.mkNixosPatch {
-            inherit version;
-            pname = "nixos_template";
-            src = packages.linux_template;
-          };
+        packages.linux_template = pkgs.mkGodot {
+          inherit version;
+          pname = "linux_template";
+          src = ./src;
+          preset = "linux"; # You need to create this preset in godot
+        };
 
-          packages.linux_template = pkgs.mkGodot {
-            inherit version;
-            pname = "linux_template";
-            src = ./src;
-            preset = "linux"; # You need to create this preset in godot
-          };
+        packages.windows_template = pkgs.mkGodot {
+          inherit version;
+          pname = "windows_template";
+          src = ./src;
+          preset = "windows"; # You need to create this preset in godot
+        };
 
-          packages.windows_template = pkgs.mkGodot {
-            inherit version;
-            pname = "windows_template";
-            src = ./src;
-            preset = "windows"; # You need to create this preset in godot
-          };
+        packages.export_templates = pkgs.export_templates;
 
-          packages.export_templates = pkgs.export_templates;
-
-          devShell = pkgs.mkShell {
-
-            buildInputs = with pkgs; [
-              godot_4
-            ];
-          };
-        }
-      ) //
-    {
+        devShell = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            godot_4
+          ];
+        };
+      }
+    )
+    // {
       templates.default = {
         description = "";
         path = ./.;
