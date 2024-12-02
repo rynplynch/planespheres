@@ -52,6 +52,7 @@
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             godot_4
+            blender
           ];
         };
       }
