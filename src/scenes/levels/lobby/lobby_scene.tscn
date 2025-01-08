@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2r1quhlp637h"]
 
 [ext_resource type="Script" path="res://scenes/levels/lobby/lobby_script.gd" id="1_7pjew"]
-[ext_resource type="PackedScene" uid="uid://he0aom0e0kug" path="res://scenes/player/player_model.blend" id="3_dvo0c"]
+[ext_resource type="PackedScene" uid="uid://dw0pgca4c6no3" path="res://models/world.gltf" id="4_353wx"]
 [ext_resource type="PackedScene" uid="uid://c7tkimfmgrkov" path="res://scenes/ui/main-menu/main_scene.tscn" id="4_ba685"]
-[ext_resource type="PackedScene" uid="uid://dyhejc78gxoi" path="res://scenes/levels/lvl0/world.new.blend" id="4_g2xyw"]
+[ext_resource type="PackedScene" uid="uid://vx3r0epkqc2c" path="res://scenes/player/player_scene.tscn" id="4_vee0r"]
 
 [node name="WorldEnvironment" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.47771, 0)
@@ -23,12 +23,11 @@ spring_length = -3.0
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -3)
 current = true
 
-[node name="player_model" parent="." instance=ExtResource("3_dvo0c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-
 [node name="MainMenu" parent="." instance=ExtResource("4_ba685")]
 
-[node name="world_new" parent="." instance=ExtResource("4_g2xyw")]
+[node name="Player" parent="." instance=ExtResource("4_vee0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[editable path="player_model"]
+[node name="world" parent="." instance=ExtResource("4_353wx")]
+
 [editable path="MainMenu"]

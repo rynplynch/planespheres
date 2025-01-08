@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://c2frkupo5c8pm"]
 
 [ext_resource type="Sky" uid="uid://c0d77ot2s3rgo" path="res://scenes/levels/lvl0/sky.tres" id="1_1lej2"]
-[ext_resource type="PackedScene" uid="uid://vx3r0epkqc2c" path="res://scenes/player/player_scene.tscn" id="2_6s3t3"]
 [ext_resource type="Script" path="res://scenes/levels/lvl0/world_script.gd" id="2_y0s6g"]
 [ext_resource type="PackedScene" uid="uid://ffxgk8ym8re1" path="res://scenes/mobs/suzanne/suzanne_scene.tscn" id="3_0fdpy"]
+[ext_resource type="PackedScene" uid="uid://dw0pgca4c6no3" path="res://models/world.gltf" id="6_4l4mr"]
 [ext_resource type="PackedScene" uid="uid://d4bdb5s4lfh4w" path="res://scenes/ui/lvl0/lvl0-ui.tscn" id="6_27k8e"]
-[ext_resource type="PackedScene" uid="uid://cgkao7tgcqcdo" path="res://scenes/levels/lvl0/world.blend" id="6_uy3ly"]
+[ext_resource type="PackedScene" uid="uid://vx3r0epkqc2c" path="res://scenes/player/player_scene.tscn" id="6_pgs0u"]
 
 [sub_resource type="Environment" id="Environment_gmvwj"]
 background_mode = 2
@@ -19,17 +19,6 @@ reflected_light_source = 1
 environment = SubResource("Environment_gmvwj")
 camera_attributes = SubResource("CameraAttributesPhysical_v1v4h")
 script = ExtResource("2_y0s6g")
-
-[node name="Player" parent="." instance=ExtResource("2_6s3t3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.93169, 3, 0)
-cam_zoom = 1
-
-[node name="Camera3D" parent="Player/CameraTarget/SpringArm3D" index="0"]
-current = true
-
-[node name="Sphere-rigid" parent="Player/sphere" index="0"]
-transform = Transform3D(2.93582, 0, 0, 0, 2.93582, 0, 0, 0, 2.93582, 0, 0, 0)
-physics_material_override = null
 
 [node name="mobs" type="Node" parent="."]
 
@@ -56,11 +45,9 @@ sky_mode = 1
 [node name="UserUI" parent="." instance=ExtResource("6_27k8e")]
 visible = false
 
-[node name="world" parent="." instance=ExtResource("6_uy3ly")]
+[node name="Player" parent="." instance=ExtResource("6_pgs0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[connection signal="property_list_changed" from="Player" to="UserUI" method="_on_player_property_list_changed"]
+[node name="world" parent="." instance=ExtResource("6_4l4mr")]
 
-[editable path="Player"]
-[editable path="Player/sphere"]
 [editable path="mobs/Suzanne3"]
-[editable path="mobs/Suzanne3/suzanne_model"]

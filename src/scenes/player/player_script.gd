@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var torque_magnitude = 60
+@export var torque_magnitude = 100
 @export var cam_speed = 10
 @export var cam_rot_speed = 5
 @export var pitch_range = Vector2(-50,50)
@@ -9,12 +9,12 @@ extends Node3D
 @export var mass = .1
 
 # rigid body of the players sphere
-@onready var rb : RigidBody3D = $"sphere/Sphere-rigid"
+@onready var rb : RigidBody3D = $"player/Sphere-rigid"
 
 var rb_physics_mat : PhysicsMaterial
 var rb_mass = 1
 var rb_dir = Vector3.ZERO
-signal positionchange (who_changed_position, whats_the_new_position)
+#signal positionchange (who_changed_position, whats_the_new_position)
 @onready var previous_pos = Vector3.ZERO
 
 # all parts related to the camera
@@ -45,7 +45,8 @@ func _ready():
 func _physics_process(delta):
 	
 	if global_position != previous_pos:
-		emit_signal("positionchange", name, global_position)
+		pass
+		#emit_signal("positionchange", name, global_position)
 		
 	previous_pos = global_position
 	# get the new direction the player wants to move in

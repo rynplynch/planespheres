@@ -27,7 +27,7 @@ func _ready():
 	cam_spring = $"CameraTarget/SpringArm3D"
 	cam = $"CameraTarget/SpringArm3D/Camera3D"
 	
-	sphere_rigid = $"player_model/Sphere-rigid"
+	sphere_rigid = $"Player/player/Sphere-rigid"
 	
 	# camera starts at a distance of -3 meters
 	cam_spring.spring_length = cam_dis
