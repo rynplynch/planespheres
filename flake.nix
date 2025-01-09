@@ -2,8 +2,11 @@
   description = "Godot development environment";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    # helpful tools for maintaining the flake
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # use nix flake update to bump the version of nixpkgs used
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # This input represents large static files I don't want in the repo
     # I plan on hosting these files using the same domain hosting the web build
