@@ -66,19 +66,19 @@
 
         formatter = pkgs.alejandra;
 
-        devShell = with pkgs;
-          mkShell {
-            buildInputs = [
-              godot_4
-              blender
-            ];
-          };
-      }
-    )
-    // {
-      templates.default = {
-        description = "";
-        path = ./.;
+        # development environment used to work on dotnet source code
+        # enter using 'nix develop'
+        devShells.default = pkgs.mkShell {
+          buildInputs = [
+            (
+              with pkgs;
+                mkShell [
+                  blender
+                  godot_4
+                ]
+            )
+          ];
+        };
       };
     };
 }
