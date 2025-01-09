@@ -6,6 +6,7 @@
   copyDesktopItems,
   export_templates,
 }: {
+  spheres-of-fun-materials,
   pname,
   version,
   src,
@@ -39,6 +40,8 @@ stdenv.mkDerivation rec {
     mkdir -p /build/.local/share/godot/export_templates/
 
     ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.3.stable
+
+    ln -s ${spheres-of-fun-materials} /build/src/materials
 
     mkdir -p $out/share/${pname}
     godot4 --headless --export-${exportMode} "${preset}" \

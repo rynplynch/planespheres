@@ -36,7 +36,21 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "spheres-of-fun-materials": "spheres-of-fun-materials"
+      }
+    },
+    "spheres-of-fun-materials": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736370875,
+        "narHash": "sha256-fJXDww/6r7m6EnzXjLR42C2jWANqdxoWTENLYEt9SDg=",
+        "path": "/home/ryanl/git-repos/godot-projects/Spheres-of-Fun/src/materials/",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/ryanl/git-repos/godot-projects/Spheres-of-Fun/src/materials/",
+        "type": "path"
       }
     },
     "systems": {
