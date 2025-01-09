@@ -17,15 +17,6 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    spheres-of-fun-materials,
-  } @ inputs:
-    flake-utils.lib.eachDefaultSystem
-    (
-      system: let
         pkgs = import nixpkgs {
           inherit system;
           overlays = [(import ./overlays.nix {inherit inputs;})];
@@ -36,8 +27,20 @@
         apps.nixos_template = flake-utils.lib.mkApp {
           drv = self.packages.${system}.nixos_template;
         };
+  outputs = inputs @ {flake-parts, ...}:
+  # generate the flake, while passing input attributes
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      # different systems that rplwork can be built for
+      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
 
         packages.default = packages.nixos_template;
+      # helper function that handles ${system} for us
+      perSystem = {
+        # used to reference nixpkgs, called because we inherited inputs
+        pkgs,
+        self',
+        ...
+      }: {
 
         packages.nixos_template = pkgs.mkNixosPatch {
           inherit version;
