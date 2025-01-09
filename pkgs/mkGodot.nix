@@ -37,7 +37,8 @@ stdenv.mkDerivation rec {
       export_presets.cfg
 
     mkdir -p /build/.local/share/godot/export_templates/
-    ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.2.1.stable
+
+    ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.3.stable
 
     mkdir -p $out/share/${pname}
     godot4 --headless --export-${exportMode} "${preset}" \
