@@ -49,6 +49,8 @@
 
         packages.export_templates = pkgs.export_templates;
 
+        formatter = pkgs.alejandra;
+
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             godot_4
