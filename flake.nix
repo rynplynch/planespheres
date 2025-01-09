@@ -51,8 +51,8 @@
 
         formatter = pkgs.alejandra;
 
-        devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [
+        devShell = with pkgs; mkShell {
+          buildInputs = [
             godot_4
             blender
           ];
