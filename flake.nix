@@ -1,5 +1,5 @@
 {
-  description = "Godot development environment";
+  description = "A game made using the Godot engine. Currently roll around as a sphere!";
 
   inputs = {
     # helpful tools for maintaining the flake
