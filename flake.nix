@@ -19,7 +19,7 @@
           overlays = [(import ./overlays.nix {inherit inputs;})];
         };
 
-        version = "0.1.0";
+        version = "1.0.0";
       in rec {
         apps.nixos_template = flake-utils.lib.mkApp {
           drv = self.packages.${system}.nixos_template;
