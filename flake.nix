@@ -60,12 +60,13 @@
 
         formatter = pkgs.alejandra;
 
-        devShell = with pkgs; mkShell {
-          buildInputs = [
-            godot_4
-            blender
-          ];
-        };
+        devShell = with pkgs;
+          mkShell {
+            buildInputs = [
+              godot_4
+              blender
+            ];
+          };
       }
     )
     // {
