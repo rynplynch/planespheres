@@ -67,13 +67,8 @@
         # enter using 'nix develop'
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            (
-              with pkgs;
-                mkShell [
-                  blender
-                  godot_4
-                ]
-            )
+            pkgs.blender
+            pkgs.godot_4-mono
           ];
         };
       };
