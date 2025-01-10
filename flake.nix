@@ -17,23 +17,12 @@
     };
   };
 
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [(import ./overlays.nix {inherit inputs;})];
-        };
-
-        version = "1.0.0";
-      in rec {
-        apps.nixos_template = flake-utils.lib.mkApp {
-          drv = self.packages.${system}.nixos_template;
-        };
   outputs = inputs @ {flake-parts, ...}:
   # generate the flake, while passing input attributes
     flake-parts.lib.mkFlake {inherit inputs;} {
       # different systems that rplwork can be built for
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
 
-        packages.default = packages.nixos_template;
       # helper function that handles ${system} for us
       perSystem = {
         # used to reference nixpkgs, called because we inherited inputs
@@ -41,29 +30,37 @@
         self',
         ...
       }: {
+        packages.default = self'.packages.nixos_template;
 
-        packages.nixos_template = pkgs.mkNixosPatch {
-          inherit version;
+        packages.nixos_template = pkgs.callPackage ./pkgs/mkNixosPatch.nix {
+          version = "1.0.0";
           pname = "nixos_template";
-          src = packages.linux_template;
+          src = self'.packages.spheres-of-fun;
+        };
+        # assign the default package to run with 'nix run .'
+        apps.default = {
+          type = "app";
+          # self' = self prime
+          # self' allows us to reference the future derivation that is created with this flake
+          program = self'.packages.nixos_template;
         };
 
-        packages.linux_template = pkgs.mkGodot {
-          inherit version spheres-of-fun-materials;
+        # call the rplwork_client nix module and expose it via the packages.rplwork attribute
+        # this is what is referenced with self'.packages.rplwork_client
+        packages.spheres-of-fun = pkgs.callPackage ./pkgs/mkGodot.nix {
+          export_templates = self'.packages.export-templates;
+
+          spheres-of-fun-materials = inputs.spheres-of-fun-materials;
+          version = "1.0.0";
           pname = "linux_template";
           src = ./src;
           preset = "linux"; # You need to create this preset in godot
         };
 
-        packages.windows_template = pkgs.mkGodot {
-          inherit version spheres-of-fun-materials;
-          pname = "windows_template";
-          src = ./src;
-          preset = "windows"; # You need to create this preset in godot
-        };
+        # the export templates are presets to help build our game for different systems
+        packages.export-templates = pkgs.callPackage ./pkgs/export_templates.nix {};
 
-        packages.export_templates = pkgs.export_templates;
-
+        # use 'nix fmt' before committing changes in git
         formatter = pkgs.alejandra;
 
         # development environment used to work on dotnet source code
