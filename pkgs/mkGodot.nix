@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  godot_4,
+  godot_4-mono,
   fontconfig,
   copyDesktopItems,
   export_templates,
@@ -20,7 +20,7 @@
 
     buildInputs = [
       copyDesktopItems
-      godot_4
+      godot_4-mono
     ];
 
     postPatch = ''
@@ -39,12 +39,12 @@
 
       mkdir -p /build/.local/share/godot/export_templates/
 
-      ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.3.stable
+      ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.3.stable.mono
 
       ln -s ${spheres-of-fun-materials} /build/src/materials
 
       mkdir -p $out/share/${pname}
-      godot4 --headless --export-${exportMode} "${preset}" \
+      godot4-mono --headless --export-${exportMode} "${preset}" \
         $out/share/${pname}/${pname}
 
       runHook postBuild

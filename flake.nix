@@ -28,8 +28,17 @@
         # used to reference nixpkgs, called because we inherited inputs
         pkgs,
         self',
+        system,
         ...
       }: {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [
+            (final: prev: {
+            })
+          ];
+          config = {};
+        };
         packages.default = self'.packages.nixos_template;
 
         packages.nixos_template = pkgs.callPackage ./pkgs/mkNixosPatch.nix {
@@ -67,13 +76,8 @@
         # enter using 'nix develop'
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            (
-              with pkgs;
-                mkShell [
-                  blender
-                  godot_4
-                ]
-            )
+            pkgs.blender
+            pkgs.godot_4-mono
           ];
         };
       };
