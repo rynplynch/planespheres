@@ -1,7 +1,6 @@
 {
   lib,
   stdenv,
-  mkGodot,
   copyDesktopItems,
   installShellFiles,
   autoPatchelfHook,
@@ -10,47 +9,49 @@
   libGL,
   libxkbcommon,
   alsa-lib,
-}: {
   pname,
   version,
   src,
   desktopItems ? [],
-}:
-stdenv.mkDerivation rec {
-  inherit pname version src desktopItems;
+}: let
+  nixBuild = stdenv.mkDerivation rec {
+    inherit pname version src desktopItems;
+    meta.mainProgram = pname;
 
-  nativeBuildInputs = [
-    autoPatchelfHook
-    installShellFiles
-    copyDesktopItems
-  ];
+    nativeBuildInputs = [
+      autoPatchelfHook
+      installShellFiles
+      copyDesktopItems
+    ];
 
-  runtimeDependencies = [
-    vulkan-loader
-    libGL
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXinerama
-    xorg.libXext
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXi
-    xorg.libXfixes
-    libxkbcommon
-    alsa-lib
-  ];
+    runtimeDependencies = [
+      vulkan-loader
+      libGL
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libXinerama
+      xorg.libXext
+      xorg.libXrandr
+      xorg.libXrender
+      xorg.libXi
+      xorg.libXfixes
+      libxkbcommon
+      alsa-lib
+    ];
 
-  postPatch = ''
-    patchShebangs scripts
-  '';
+    postPatch = ''
+      patchShebangs scripts
+    '';
 
-  installPhase = ''
-    runHook preInstall
+    installPhase = ''
+      runHook preInstall
 
-    mkdir $out
-    mv bin/* bin/${pname} || true # Rename fails if pname is the same
-    cp -r * $out
+      mkdir $out
+      mv bin/* bin/${pname} || true # Rename fails if pname is the same
+      cp -r * $out
 
-    runHook postInstall
-  '';
-}
+      runHook postInstall
+    '';
+  };
+in
+  nixBuild
