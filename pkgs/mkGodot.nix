@@ -5,7 +5,7 @@
   fontconfig,
   copyDesktopItems,
   export_templates,
-  spheres-of-fun-materials,
+  plane-spheres-materials,
   pname,
   version,
   src,
@@ -15,7 +15,7 @@
   exportTemplates ? export_templates, # absolute path to the nix store
 }: let
   meta.mainProgram = pname;
-  spheres-of-fun = stdenv.mkDerivation rec {
+  plane-spheres = stdenv.mkDerivation rec {
     inherit pname version src desktopItems;
 
     buildInputs = [
@@ -41,7 +41,7 @@
 
       ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.3.stable.mono
 
-      ln -s ${spheres-of-fun-materials} /build/src/materials
+      ln -s ${plane-spheres-materials} /build/planespheres_client/materials
 
       mkdir -p $out/share/${pname}
       godot4-mono --headless --export-${exportMode} "${preset}" \
@@ -78,4 +78,4 @@
     '';
   };
 in
-  spheres-of-fun
+  plane-spheres
