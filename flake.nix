@@ -11,10 +11,10 @@
     # This input represents large static files I don't want in the repo
     # I plan on hosting these files using the same domain hosting the web build
     # TODO: change url to endpoint that servers static files
-    spheres-of-fun-materials = {
-      url = "path:/home/ryanl/git-repos/godot-projects/Spheres-of-Fun/src/materials/";
-      flake = false;
-    };
+    plane-spheres-materials = {
+      url = "path:/home/ryanl/git-repos/godot-projects/planespheres/planespheres_client/materials/";
+       flake = false;
+     };
   };
 
   outputs = inputs @ {flake-parts, ...}:
