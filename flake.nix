@@ -82,8 +82,14 @@
         # enter using 'nix develop'
         devShells.default = pkgs.mkShell {
           buildInputs = [
+            # used for developing the game itself
+            pkgs.godot_4
             pkgs.blender
+            # used for developing the game server, written in c#
             pkgs.godot_4-mono
+            # used for developing the website
+            pkgs.dotnetCorePackages.dotnet_9.sdk
+            pkgs.dotnetCorePackages.dotnet_9.aspnetcore
           ];
         };
       };
