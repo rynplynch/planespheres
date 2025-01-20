@@ -46,24 +46,24 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/e9b51731911566bbf7e4895475a87fe06961de0b.tar.gz"
       }
     },
+    "plane-spheres-materials": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736749907,
+        "narHash": "sha256-fJXDww/6r7m6EnzXjLR42C2jWANqdxoWTENLYEt9SDg=",
+        "path": "/home/ryanl/git-repos/godot-projects/planespheres/planespheres_client/materials/",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/ryanl/git-repos/godot-projects/planespheres/planespheres_client/materials/",
+        "type": "path"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
-        "spheres-of-fun-materials": "spheres-of-fun-materials"
-      }
-    },
-    "spheres-of-fun-materials": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1736370875,
-        "narHash": "sha256-fJXDww/6r7m6EnzXjLR42C2jWANqdxoWTENLYEt9SDg=",
-        "path": "/home/ryanl/git-repos/godot-projects/Spheres-of-Fun/src/materials/",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/ryanl/git-repos/godot-projects/Spheres-of-Fun/src/materials/",
-        "type": "path"
+        "plane-spheres-materials": "plane-spheres-materials"
       }
     }
   },

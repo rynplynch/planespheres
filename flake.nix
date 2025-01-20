@@ -11,10 +11,10 @@
     # This input represents large static files I don't want in the repo
     # I plan on hosting these files using the same domain hosting the web build
     # TODO: change url to endpoint that servers static files
-    spheres-of-fun-materials = {
-      url = "path:/home/ryanl/git-repos/godot-projects/Spheres-of-Fun/src/materials/";
-      flake = false;
-    };
+    plane-spheres-materials = {
+      url = "path:/home/ryanl/git-repos/godot-projects/planespheres/planespheres_client/materials/";
+       flake = false;
+     };
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -37,14 +37,20 @@
             (final: prev: {
             })
           ];
-          config = {};
+          config = {
+            # godot_4-mono requires this
+            # TODO: godot minimum version changing soon https://godotengine.org/article/godotsharp-packages-net8/
+            permittedInsecurePackages = [
+              "dotnet-sdk-6.0.428"
+            ];
+          };
         };
         packages.default = self'.packages.nixos_template;
 
         packages.nixos_template = pkgs.callPackage ./pkgs/mkNixosPatch.nix {
           version = "1.0.0";
           pname = "nixos_template";
-          src = self'.packages.spheres-of-fun;
+          src = self'.packages.plane-spheres;
         };
         # assign the default package to run with 'nix run .'
         apps.default = {
@@ -56,13 +62,13 @@
 
         # call the rplwork_client nix module and expose it via the packages.rplwork attribute
         # this is what is referenced with self'.packages.rplwork_client
-        packages.spheres-of-fun = pkgs.callPackage ./pkgs/mkGodot.nix {
+        packages.plane-spheres = pkgs.callPackage ./pkgs/mkGodot.nix {
           export_templates = self'.packages.export-templates;
 
-          spheres-of-fun-materials = inputs.spheres-of-fun-materials;
+          plane-spheres-materials = inputs.plane-spheres-materials;
           version = "1.0.0";
           pname = "linux_template";
-          src = ./src;
+          src = ./planespheres_client;
           preset = "linux"; # You need to create this preset in godot
         };
 
