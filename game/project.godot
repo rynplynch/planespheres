@@ -10,9 +10,10 @@ config_version=5
 
 [application]
 
-config/name="ball-on-plane"
+config/name="plane-spheres"
+config/description="Control a ball on a plane! Using this project as a proof of concept on creating a multiplayer game using Godot!"
 run/main_scene="res://scenes/levels/lobby/lobby_scene.tscn"
-config/features=PackedStringArray("4.3", "C#", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
