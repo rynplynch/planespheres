@@ -51,11 +51,11 @@
       "locked": {
         "lastModified": 1736749907,
         "narHash": "sha256-fJXDww/6r7m6EnzXjLR42C2jWANqdxoWTENLYEt9SDg=",
-        "path": "/home/ryanl/git-repos/godot-projects/planespheres/planespheres_client/materials/",
+        "path": "/home/ryanl/git-repos/godot-projects/planespheres/game/materials/",
         "type": "path"
       },
       "original": {
-        "path": "/home/ryanl/git-repos/godot-projects/planespheres/planespheres_client/materials/",
+        "path": "/home/ryanl/git-repos/godot-projects/planespheres/game/materials/",
         "type": "path"
       }
     },

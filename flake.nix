@@ -12,9 +12,9 @@
     # I plan on hosting these files using the same domain hosting the web build
     # TODO: change url to endpoint that servers static files
     plane-spheres-materials = {
-      url = "path:/home/ryanl/git-repos/godot-projects/planespheres/planespheres_client/materials/";
-       flake = false;
-     };
+      url = "path:/home/ryanl/git-repos/godot-projects/planespheres/game/materials/";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -68,7 +68,7 @@
           plane-spheres-materials = inputs.plane-spheres-materials;
           version = "1.0.0";
           pname = "linux_template";
-          src = ./planespheres_client;
+          src = ./game;
           preset = "linux"; # You need to create this preset in godot
         };
 
