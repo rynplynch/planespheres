@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/ryanl/git-repos/godot-projects/planespheres/website/planespheres.csproj": {}
+  },
+  "projects": {
+    "/home/ryanl/git-repos/godot-projects/planespheres/website/planespheres.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ryanl/git-repos/godot-projects/planespheres/website/planespheres.csproj",
+        "projectName": "planespheres",
+        "projectPath": "/home/ryanl/git-repos/godot-projects/planespheres/website/planespheres.csproj",
+        "packagesPath": "/home/ryanl/.nuget/packages/",
+        "outputPath": "/home/ryanl/git-repos/godot-projects/planespheres/website/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ryanl/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/nix/store/vhvgizfqfcgzwjaslbyca10yx3h9fn7k-dotnet-sdk-9.0.101/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/nix/store/vhvgizfqfcgzwjaslbyca10yx3h9fn7k-dotnet-sdk-9.0.101/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
