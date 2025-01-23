@@ -79,6 +79,8 @@
           preset = "linux"; # You need to create this preset in godot
         };
 
+        packages.website = pkgs.callPackage ./pkgs/planespheres-website.nix {inherit inputs;};
+
         # the export templates are presets to help build our game for different systems
         packages.export-templates = pkgs.callPackage ./pkgs/export_templates.nix {};
 
