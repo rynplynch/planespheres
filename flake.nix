@@ -51,19 +51,20 @@
             ];
           };
         };
-        packages.default = self'.packages.nixos_template;
+        packages.default = self'.packages.nix-plane-spheres;
 
-        packages.nixos_template = pkgs.callPackage ./pkgs/mkNixosPatch.nix {
+        packages.nix-plane-spheres = pkgs.callPackage ./pkgs/mkNixosPatch.nix {
           version = "1.0.0";
           pname = "nixos_template";
           src = self'.packages.plane-spheres;
         };
+
         # assign the default package to run with 'nix run .'
         apps.default = {
           type = "app";
           # self' = self prime
           # self' allows us to reference the future derivation that is created with this flake
-          program = self'.packages.nixos_template;
+          program = self'.packages.nix-plane-spheres;
         };
 
         # call the rplwork_client nix module and expose it via the packages.rplwork attribute
