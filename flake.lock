@@ -20,11 +20,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1736012469,
-        "narHash": "sha256-/qlNWm/IEVVH7GfgAIyP6EsVZI6zjAx1cV5zNyrs+rI=",
+        "lastModified": 1737469691,
+        "narHash": "sha256-nmKOgAU48S41dTPIXAq0AHZSehWUn6ZPrUKijHAMmIk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8f3e1f807051e32d8c95cd12b9b421623850a34d",
+        "rev": "9e4d5190a9482a1fb9d18adf0bdb83c6e506eaab",
         "type": "github"
       },
       "original": {
@@ -46,10 +46,31 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/e9b51731911566bbf7e4895475a87fe06961de0b.tar.gz"
       }
     },
+    "nuget-packageslock2nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1690832952,
+        "narHash": "sha256-lK8lnmcy+4aj0zBUDNh4icamVgQ2jlIKPNx007/zEOA=",
+        "owner": "mdarocha",
+        "repo": "nuget-packageslock2nix",
+        "rev": "5897dae0aaee226bce938afd787ada535a8f0ea2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mdarocha",
+        "ref": "main",
+        "repo": "nuget-packageslock2nix",
+        "type": "github"
+      }
+    },
     "plane-spheres-materials": {
       "flake": false,
       "locked": {
-        "lastModified": 1736749907,
+        "lastModified": 1737589702,
         "narHash": "sha256-fJXDww/6r7m6EnzXjLR42C2jWANqdxoWTENLYEt9SDg=",
         "path": "/home/ryanl/git-repos/godot-projects/planespheres/game/materials/",
         "type": "path"
@@ -63,6 +84,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
+        "nuget-packageslock2nix": "nuget-packageslock2nix",
         "plane-spheres-materials": "plane-spheres-materials"
       }
     }

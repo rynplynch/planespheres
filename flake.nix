@@ -15,6 +15,12 @@
       url = "path:/home/ryanl/git-repos/godot-projects/planespheres/game/materials/";
       flake = false;
     };
+
+    # helpful tool to manage dotnet nuget dependencies
+    nuget-packageslock2nix = {
+      url = "github:mdarocha/nuget-packageslock2nix/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
