@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  godot_4-mono,
+  godot_4,
   fontconfig,
   copyDesktopItems,
   export_templates,
@@ -15,12 +15,12 @@
   exportTemplates ? export_templates, # absolute path to the nix store
 }: let
   meta.mainProgram = pname;
-  plane-spheres = stdenv.mkDerivation rec {
+  godot-build = stdenv.mkDerivation rec {
     inherit pname version src desktopItems;
 
     buildInputs = [
       copyDesktopItems
-      godot_4-mono
+      godot_4
     ];
 
     postPatch = ''
@@ -39,12 +39,12 @@
 
       mkdir -p /build/.local/share/godot/export_templates/
 
-      ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.3.stable.mono
+      ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.3.stable
 
-      ln -s ${plane-spheres-materials} /build/planespheres_client/materials
+      ln -s ${plane-spheres-materials} /build/game/materials
 
       mkdir -p $out/share/${pname}
-      godot4-mono --headless --export-${exportMode} "${preset}" \
+      godot4 --headless --export-${exportMode} "${preset}" \
         $out/share/${pname}/${pname}
 
       runHook postBuild
@@ -78,4 +78,4 @@
     '';
   };
 in
-  plane-spheres
+  godot-build

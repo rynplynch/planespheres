@@ -12,9 +12,15 @@
     # I plan on hosting these files using the same domain hosting the web build
     # TODO: change url to endpoint that servers static files
     plane-spheres-materials = {
-      url = "path:/home/ryanl/git-repos/godot-projects/planespheres/planespheres_client/materials/";
-       flake = false;
-     };
+      url = "path:/home/ryanl/git-repos/godot-projects/planespheres/game/materials/";
+      flake = false;
+    };
+
+    # helpful tool to manage dotnet nuget dependencies
+    nuget-packageslock2nix = {
+      url = "github:mdarocha/nuget-packageslock2nix/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -45,19 +51,20 @@
             ];
           };
         };
-        packages.default = self'.packages.nixos_template;
+        packages.default = self'.packages.nix-plane-spheres;
 
-        packages.nixos_template = pkgs.callPackage ./pkgs/mkNixosPatch.nix {
+        packages.nix-plane-spheres = pkgs.callPackage ./pkgs/mkNixosPatch.nix {
           version = "1.0.0";
           pname = "nixos_template";
           src = self'.packages.plane-spheres;
         };
+
         # assign the default package to run with 'nix run .'
         apps.default = {
           type = "app";
           # self' = self prime
           # self' allows us to reference the future derivation that is created with this flake
-          program = self'.packages.nixos_template;
+          program = self'.packages.nix-plane-spheres;
         };
 
         # call the rplwork_client nix module and expose it via the packages.rplwork attribute
@@ -68,9 +75,11 @@
           plane-spheres-materials = inputs.plane-spheres-materials;
           version = "1.0.0";
           pname = "linux_template";
-          src = ./planespheres_client;
+          src = ./game;
           preset = "linux"; # You need to create this preset in godot
         };
+
+        packages.website = pkgs.callPackage ./pkgs/planespheres-website.nix {inherit inputs;};
 
         # the export templates are presets to help build our game for different systems
         packages.export-templates = pkgs.callPackage ./pkgs/export_templates.nix {};
@@ -82,8 +91,14 @@
         # enter using 'nix develop'
         devShells.default = pkgs.mkShell {
           buildInputs = [
+            # used for developing the game itself
+            pkgs.godot_4
             pkgs.blender
+            # used for developing the game server, written in c#
             pkgs.godot_4-mono
+            # used for developing the website
+            pkgs.dotnetCorePackages.dotnet_9.sdk
+            pkgs.dotnetCorePackages.dotnet_9.aspnetcore
           ];
         };
       };
