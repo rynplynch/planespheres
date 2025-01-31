@@ -70,7 +70,7 @@
         # call the rplwork_client nix module and expose it via the packages.rplwork attribute
         # this is what is referenced with self'.packages.rplwork_client
         packages.plane-spheres = pkgs.callPackage ./pkgs/mkGodot.nix {
-          export_templates = self'.packages.export-templates;
+          export_templates = pkgs.godot_4-export-templates;
 
           plane-spheres-materials = inputs.plane-spheres-materials;
           version = "1.0.0";
@@ -81,8 +81,6 @@
 
         packages.website = pkgs.callPackage ./pkgs/planespheres-website.nix {inherit inputs;};
 
-        # the export templates are presets to help build our game for different systems
-        packages.export-templates = pkgs.callPackage ./pkgs/export_templates.nix {};
 
         # use 'nix fmt' before committing changes in git
         formatter = pkgs.alejandra;
