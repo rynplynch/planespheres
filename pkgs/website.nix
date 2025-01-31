@@ -3,6 +3,7 @@
   buildDotnetModule,
   system,
   inputs,
+  web-build,
 }: let
   # started configuration attributes for dotnet projects
   pname = "planespheres-website";
@@ -30,6 +31,9 @@
       ];
     };
 
+    propagatedBuildInputs = [
+        web-build
+    ];
     # not sure what this does
     doCheck = true;
 
@@ -38,9 +42,13 @@
 
     # environment variables set at runtime
     makeWrapperArgs = [
+      # This ensures that the dotnet projects root directory is always set to the nix-store
       "--set DOTNET_CONTENTROOT ${placeholder "out"}/lib/${pname}"
+      # Lets us pick what port the server runs on
       "--set ASPNETCORE_URLS http://+:${port}/"
+      # Allows our server to serve the static files that make up the web build
+      "--set WEB_BUILD_PATH ${web-build}/share/${web-build.pname}"
     ];
   };
 in
- planespheres-website
+  planespheres-website
