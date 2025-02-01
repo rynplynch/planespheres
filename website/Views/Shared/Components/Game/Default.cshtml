@@ -1,0 +1,40 @@
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+
+<iframe id="game" src="/web-build/index.html" ></iframe>
+
+<script>
+    // this script solves for the width and height used in the iframe
+    // it does extra work to ensure the iframe is centered on the page
+
+    // get width of page
+    var w = window.innerWidth;
+
+    // grab the main div element that holds the game html
+    var d = document.getElementsByClassName("container")[0];
+
+    // get the styling of the main div element, grabbing properties
+    var dMargin = window.getComputedStyle(d, null).marginLeft;
+    var dPadding = window.getComputedStyle(d, null).paddingLeft;
+
+    // trim the "px" off the end of the css styling strings
+    var marginFormated = dMargin.substring(0, dMargin.length - 2);
+    var paddingFormated = dPadding.substring(0, dMargin.length - 2);
+
+    // with the "px" trimmed we can cast string -> float
+    var margin = (parseFloat(marginFormated));
+    var padding = (parseFloat(paddingFormated));
+
+    // account for margin and padding of div element
+    w = w - ( margin*2 ) - ( padding*2 );
+
+    // get iframe element using game label
+    var g = document.getElementById("game");
+
+    // set variables of the iframe element
+    g.width = w;
+
+    // set height so aspect ration is 16:9
+    g.height = w / (16/9);
+
+
+</script>

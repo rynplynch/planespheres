@@ -5,7 +5,7 @@
     # helpful tools for maintaining the flake
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    # use nix flake update to bump the version of nixpkgs used
+    # use 'nix flake update' to bump the version of nixpkgs used
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # This input represents large static files I don't want in the repo
@@ -26,23 +26,28 @@
   outputs = inputs @ {flake-parts, ...}:
   # generate the flake, while passing input attributes
     flake-parts.lib.mkFlake {inherit inputs;} {
-      # different systems that rplwork can be built for
-      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
+      # different systems that we support, need other machines for testing
+      systems = ["x86_64-linux"];
 
       # helper function that handles ${system} for us
       perSystem = {
-        # used to reference nixpkgs, called because we inherited inputs
         pkgs,
         self',
         system,
         ...
       }: {
+        # Alter the packages argument of our flake expression
         _module.args.pkgs = import inputs.nixpkgs {
+          # Build packages from nixpkgs for the current system
           inherit system;
+
+          # Customize packages from nixpkgs
           overlays = [
             (final: prev: {
             })
           ];
+
+          # Further customization of nixpkgs
           config = {
             # godot_4-mono requires this
             # TODO: godot minimum version changing soon https://godotengine.org/article/godotsharp-packages-net8/
@@ -51,26 +56,30 @@
             ];
           };
         };
-        packages.default = self'.packages.nix-plane-spheres;
-
-        packages.nix-plane-spheres = pkgs.callPackage ./pkgs/mkNixosPatch.nix {
-          version = "1.0.0";
-          pname = "nixos_template";
-          src = self'.packages.plane-spheres;
-        };
-
         # assign the default package to run with 'nix run .'
         apps.default = {
           type = "app";
           # self' = self prime
           # self' allows us to reference the future derivation that is created with this flake
-          program = self'.packages.nix-plane-spheres;
+          program = self'.packages.nix-build;
         };
+
+                    # If no package specified call this one, 'nix build .'
+        packages.default = self'.packages.nix-build;
+
+        # Wrap godot build for linux enviroment
+        packages.nix-build = pkgs.callPackage ./pkgs/mkNixosPatch.nix {
+          version = "1.0.0";
+          pname = "nix-build";
+          src = self'.packages.linux-build;
+        };
+
 
         # call the rplwork_client nix module and expose it via the packages.rplwork attribute
         # this is what is referenced with self'.packages.rplwork_client
-        packages.plane-spheres = pkgs.callPackage ./pkgs/mkGodot.nix {
-          export_templates = self'.packages.export-templates;
+        packages.linux-build = pkgs.callPackage ./pkgs/linux-build.nix {
+          # fetch export templates, provided by godot team to help build
+          export_templates = pkgs.godot_4-export-templates;
 
           plane-spheres-materials = inputs.plane-spheres-materials;
           version = "1.0.0";
@@ -79,10 +88,25 @@
           preset = "linux"; # You need to create this preset in godot
         };
 
-        packages.website = pkgs.callPackage ./pkgs/planespheres-website.nix {inherit inputs;};
+        packages.web-build-wrapper = pkgs.callPackage ./pkgs/web-build-wrapper.nix{
+            web-build = self'.packages.web-build;
+        };
 
-        # the export templates are presets to help build our game for different systems
-        packages.export-templates = pkgs.callPackage ./pkgs/export_templates.nix {};
+        packages.web-build = pkgs.callPackage ./pkgs/web-build.nix {
+          # fetch export templates, provided by godot team to help build
+          export_templates = pkgs.godot_4-export-templates;
+
+          plane-spheres-materials = inputs.plane-spheres-materials;
+          version = "1.0.0";
+          pname = "index";
+          src = ./game;
+          preset = "Web"; # You need to create this preset in godot
+        };
+
+        packages.website = pkgs.callPackage ./pkgs/website.nix {
+          inherit inputs;
+          web-build = self'.packages.web-build;
+        };
 
         # use 'nix fmt' before committing changes in git
         formatter = pkgs.alejandra;
@@ -94,11 +118,10 @@
             # used for developing the game itself
             pkgs.godot_4
             pkgs.blender
-            # used for developing the game server, written in c#
-            pkgs.godot_4-mono
             # used for developing the website
             pkgs.dotnetCorePackages.dotnet_9.sdk
             pkgs.dotnetCorePackages.dotnet_9.aspnetcore
+            pkgs.python3
           ];
         };
       };
