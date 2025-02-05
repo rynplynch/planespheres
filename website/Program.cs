@@ -107,6 +107,26 @@ public class Startup
             RequestPath = new PathString("/look")
         });
 
+        // Path to materials/assets used to build plane-spheres
+        var materialsPath = System.Environment.GetEnvironmentVariable("MATERIALS_PATH");
+
+        // If that path exits serve it
+        if (materialsPath is not null)
+        {
+            // Point to the data in the nix-store
+            var materialsFileProvider = new PhysicalFileProvider(materialsPath);
+
+            // serve static files and pass in options
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                // Server static files using our web build provider
+                FileProvider = materialsFileProvider,
+
+                // The endpoint mapping to our web build directory
+                RequestPath = new PathString("/materials"),
+            });
+        }
+
         // serves /wwwroot
         app.UseStaticFiles();
 
