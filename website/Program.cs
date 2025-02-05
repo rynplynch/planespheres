@@ -102,10 +102,10 @@ public class Startup
 
         // TODO: Remove this. Here just for debugging, helps me confirm web build is being served
         app.UseDirectoryBrowser(new DirectoryBrowserOptions
-                {
-                FileProvider = webBuildProvider,
-                RequestPath = new PathString("/look")
-                });
+        {
+            FileProvider = webBuildProvider,
+            RequestPath = new PathString("/look")
+        });
 
         // serves /wwwroot
         app.UseStaticFiles();
