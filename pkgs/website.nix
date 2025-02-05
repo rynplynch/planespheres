@@ -4,6 +4,7 @@
   system,
   inputs,
   web-build,
+  plane-spheres-materials-tar,
 }: let
   # started configuration attributes for dotnet projects
   pname = "planespheres-website";
@@ -48,7 +49,10 @@
       "--set ASPNETCORE_URLS http://+:${port}/"
       # Allows our server to serve the static files that make up the web build
       "--set WEB_BUILD_PATH ${web-build}/share/${web-build.pname}"
+      # Allows our server to serve assets used in the building of our game
+      "--set MATERIALS_PATH ${plane-spheres-materials-tar}"
     ];
   };
 in
   planespheres-website
+
