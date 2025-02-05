@@ -8,9 +8,7 @@
     # use 'nix flake update' to bump the version of nixpkgs used
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # This input represents large static files I don't want in the repo
-    # I plan on hosting these files using the same domain hosting the web build
-    # TODO: change url to endpoint that servers static files
+    # WARN: in order to build the website image you must have the uncompressed assets for the game
     plane-spheres-materials = {
       url = "path:/home/ryanl/git-repos/godot-projects/planespheres/game/materials/";
       flake = false;
@@ -106,6 +104,11 @@
         packages.website = pkgs.callPackage ./pkgs/website.nix {
           inherit inputs;
           web-build = self'.packages.web-build;
+
+        # creates a tar ball of our local game assets/materials
+        packages.plane-spheres-materials-tar = pkgs.callPackage ./pkgs/plane-spheres-materials-tar.nix {
+            inherit inputs;
+        };
         };
 
         # use 'nix fmt' before committing changes in git
