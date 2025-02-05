@@ -64,8 +64,10 @@ public class Startup
         {
             // Point to the web build in the nix-store
             webBuildProvider = new PhysicalFileProvider(webBuildPath);
+        }
         // Otherwise
-        }else{
+        else
+        {
             //point to a backup build in wwwroot/game, helpful for development
             webBuildProvider = new PhysicalFileProvider(env.WebRootPath + "/game");
         }
@@ -78,25 +80,25 @@ public class Startup
 
         // serve static files and pass in options
         app.UseStaticFiles(new StaticFileOptions
-                {
-                // Server static files using our web build provider
-                FileProvider = webBuildProvider,
+        {
+            // Server static files using our web build provider
+            FileProvider = webBuildProvider,
 
-                // The endpoint mapping to our web build directory
-                RequestPath = new PathString("/web-build"),
+            // The endpoint mapping to our web build directory
+            RequestPath = new PathString("/web-build"),
 
-                // Make sure they are served with the right MIME type
-                ContentTypeProvider = godotContentTypes,
+            // Make sure they are served with the right MIME type
+            ContentTypeProvider = godotContentTypes,
 
-                // before serving the files make changes to the response
-                OnPrepareResponse = ctx =>
-                {
+            // before serving the files make changes to the response
+            OnPrepareResponse = ctx =>
+            {
                 // headers that are required while serving Godot web-build
                 ctx.Context.Response.Headers.Append("Cross-Origin-Opener-Policy", "same-origin");
                 ctx.Context.Response.Headers.Append("Cross-Origin-Embedder-Policy", "require-corp");
                 ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
-                }
-                });
+            }
+        });
 
         // TODO: Remove this. Here just for debugging, helps me confirm web build is being served
         app.UseDirectoryBrowser(new DirectoryBrowserOptions
