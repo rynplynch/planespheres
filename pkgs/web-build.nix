@@ -5,7 +5,7 @@
   fontconfig,
   copyDesktopItems,
   export_templates,
-  plane-spheres-materials,
+  plane-spheres-materials-tar,
   pname,
   version,
   src,
@@ -36,7 +36,7 @@
 
       ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.3.stable
 
-      ln -s ${plane-spheres-materials} /build/game/materials
+      ln -s ${plane-spheres-materials-tar}/store/*source/ /build/game/materials
 
       mkdir -p $out/share/${pname}
       godot4 --headless --export-${exportMode} "${preset}" \
