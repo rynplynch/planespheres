@@ -117,6 +117,9 @@
         packages.plane-spheres-materials-tar = pkgs.callPackage ./pkgs/plane-spheres-materials-tar.nix {
             inherit inputs;
         };
+
+        packages.website-image = pkgs.callPackage ./pkgs/website-image.nix {
+            website = self'.packages.website;
         };
 
         # use 'nix fmt' before committing changes in git
