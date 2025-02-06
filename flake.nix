@@ -103,6 +103,7 @@
           plane-spheres-materials-tar = inputs.plane-spheres-materials-tar;
           version = "1.0.0";
           pname = "index";
+          exportMode = "debug";
           src = ./game;
           preset = "Web"; # You need to create this preset in godot
         };
