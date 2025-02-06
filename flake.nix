@@ -14,6 +14,12 @@
       flake = false;
     };
 
+    # TODO: I should pull these resource directly from where they are hosted, ie. polyhaven.com
+    plane-spheres-materials-tar = {
+      url = "https://www.planespheres.com/materials/plane-spheres-materials.tar.gz";
+      flake = false;
+    };
+
     # helpful tool to manage dotnet nuget dependencies
     nuget-packageslock2nix = {
       url = "github:mdarocha/nuget-packageslock2nix/main";
@@ -79,7 +85,7 @@
           # fetch export templates, provided by godot team to help build
           export_templates = pkgs.godot_4-export-templates;
 
-          plane-spheres-materials = inputs.plane-spheres-materials;
+          plane-spheres-materials-tar = inputs.plane-spheres-materials-tar;
           version = "1.0.0";
           pname = "linux_template";
           src = ./game;
@@ -94,7 +100,7 @@
           # fetch export templates, provided by godot team to help build
           export_templates = pkgs.godot_4-export-templates;
 
-          plane-spheres-materials = inputs.plane-spheres-materials;
+          plane-spheres-materials-tar = inputs.plane-spheres-materials-tar;
           version = "1.0.0";
           pname = "index";
           src = ./game;
@@ -104,6 +110,8 @@
         packages.website = pkgs.callPackage ./pkgs/website.nix {
           inherit inputs;
           web-build = self'.packages.web-build;
+          plane-spheres-materials-tar = self'.packages.plane-spheres-materials-tar;
+        };
 
         # creates a tar ball of our local game assets/materials
         packages.plane-spheres-materials-tar = pkgs.callPackage ./pkgs/plane-spheres-materials-tar.nix {

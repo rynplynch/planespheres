@@ -70,7 +70,7 @@
     "plane-spheres-materials": {
       "flake": false,
       "locked": {
-        "lastModified": 1737589702,
+        "lastModified": 1738047650,
         "narHash": "sha256-fJXDww/6r7m6EnzXjLR42C2jWANqdxoWTENLYEt9SDg=",
         "path": "/home/ryanl/git-repos/godot-projects/planespheres/game/materials/",
         "type": "path"
@@ -80,12 +80,26 @@
         "type": "path"
       }
     },
+    "plane-spheres-materials-tar": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-f7cTyTGmLqkSGH7AAKuhc9zgqXsm3vu29n1sDEqLqE8=",
+        "type": "tarball",
+        "url": "https://www.planespheres.com/materials/plane-spheres-materials.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://www.planespheres.com/materials/plane-spheres-materials.tar.gz"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
         "nuget-packageslock2nix": "nuget-packageslock2nix",
-        "plane-spheres-materials": "plane-spheres-materials"
+        "plane-spheres-materials": "plane-spheres-materials",
+        "plane-spheres-materials-tar": "plane-spheres-materials-tar"
       }
     }
   },
