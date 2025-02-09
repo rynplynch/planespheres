@@ -33,7 +33,7 @@
     };
 
     propagatedBuildInputs = [
-        web-build
+      web-build
     ];
     # not sure what this does
     doCheck = true;
@@ -55,4 +55,3 @@
   };
 in
   planespheres-website
-

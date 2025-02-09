@@ -12,4 +12,3 @@ in
     tar -czvf plane-spheres-materials.tar.gz ${plane-spheres-materials}
     mv plane-spheres-materials.tar.gz $out
   ''
-

@@ -68,7 +68,7 @@
           program = self'.packages.nix-build;
         };
 
-                    # If no package specified call this one, 'nix build .'
+        # If no package specified call this one, 'nix build .'
         packages.default = self'.packages.nix-build;
 
         # Wrap godot build for linux enviroment
@@ -77,7 +77,6 @@
           pname = "nix-build";
           src = self'.packages.linux-build;
         };
-
 
         # call the rplwork_client nix module and expose it via the packages.rplwork attribute
         # this is what is referenced with self'.packages.rplwork_client
@@ -92,8 +91,8 @@
           preset = "linux"; # You need to create this preset in godot
         };
 
-        packages.web-build-wrapper = pkgs.callPackage ./pkgs/web-build-wrapper.nix{
-            web-build = self'.packages.web-build;
+        packages.web-build-wrapper = pkgs.callPackage ./pkgs/web-build-wrapper.nix {
+          web-build = self'.packages.web-build;
         };
 
         packages.web-build = pkgs.callPackage ./pkgs/web-build.nix {
@@ -115,11 +114,11 @@
 
         # creates a tar ball of our local game assets/materials
         packages.plane-spheres-materials-tar = pkgs.callPackage ./pkgs/plane-spheres-materials-tar.nix {
-            inherit inputs;
+          inherit inputs;
         };
 
         packages.website-image = pkgs.callPackage ./pkgs/website-image.nix {
-            website = self'.packages.website;
+          website = self'.packages.website;
         };
 
         # use 'nix fmt' before committing changes in git
