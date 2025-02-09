@@ -2,6 +2,7 @@
   lib,
   stdenv,
   godot_4,
+  uutils-coreutils-noprefix,
   fontconfig,
   copyDesktopItems,
   export_templates,
@@ -21,6 +22,7 @@
     buildInputs = [
       copyDesktopItems
       godot_4
+      uutils-coreutils-noprefix
     ];
 
     postPatch = ''
