@@ -57,7 +57,7 @@ public class Startup
         var webBuildPath = System.Environment.GetEnvironmentVariable("WEB_BUILD_PATH");
 
         // A new file provider that points to our web build
-        IFileProvider webBuildProvider;
+        IFileProvider? webBuildProvider = null;
 
         // If that path exits serve it
         if (webBuildPath is not null)
