@@ -79,6 +79,10 @@ public class Startup
         // ensure that these files are delivered with correct MIME type
         godotContentTypes.Mappings[".pck"] = "application/octet-stream";
         godotContentTypes.Mappings[".wasm"] = "application/wasm";
+            // Check if the system link to the build exists
+            if (Directory.Exists(devGameBuildPath))
+            else
+                logger.LogWarning("Web build not present in wwwroot. Run 'nix build .#web-build' inside wwwroot to serve web build during development");
 
         // serve static files and pass in options
         app.UseStaticFiles(new StaticFileOptions
