@@ -94,12 +94,6 @@ public class Startup
                 // Server static files using our web build provider
                 FileProvider = webBuildProvider,
 
-        // TODO: Remove this. Here just for debugging, helps me confirm web build is being served
-        app.UseDirectoryBrowser(new DirectoryBrowserOptions
-        {
-            FileProvider = webBuildProvider,
-            RequestPath = new PathString("/look")
-        });
                 // The endpoint mapping to our web build directory
                 RequestPath = new PathString("/web-build"),
 
