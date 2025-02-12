@@ -134,7 +134,6 @@
             # used for developing the website
             pkgs.dotnetCorePackages.dotnet_9.sdk
             pkgs.dotnetCorePackages.dotnet_9.aspnetcore
-            pkgs.python3
           ];
         };
       };
