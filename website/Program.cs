@@ -68,45 +68,31 @@ public class Startup
         // Otherwise
         else
         {
-            //point to a backup build in wwwroot/game, helpful for development
-            webBuildProvider = new PhysicalFileProvider(env.WebRootPath + "/game");
             // Location we expect a version of the web build to be during development
             string devGameBuildPath = env.WebRootPath + "/result/share/PlaneSpheres/";
-        }
-        // Lets us map content types for files with none standard extensions
-        var godotContentTypes = new FileExtensionContentTypeProvider();
 
-        // ensure that these files are delivered with correct MIME type
-        godotContentTypes.Mappings[".pck"] = "application/octet-stream";
-        godotContentTypes.Mappings[".wasm"] = "application/wasm";
             // Check if the system link to the build exists
             if (Directory.Exists(devGameBuildPath))
                 //point to a backup build in wwwroot/result, helpful for development
                 webBuildProvider = new PhysicalFileProvider(devGameBuildPath);
             else
                 logger.LogWarning("Web build not present in wwwroot. Run 'nix build .#web-build' inside wwwroot to serve web build during development");
+        }
 
-        // serve static files and pass in options
-        app.UseStaticFiles(new StaticFileOptions
+        if (webBuildProvider is not null)
         {
-            // Server static files using our web build provider
-            FileProvider = webBuildProvider,
+            // Lets us map content types for files with none standard extensions
+            var godotContentTypes = new FileExtensionContentTypeProvider();
 
-            // The endpoint mapping to our web build directory
-            RequestPath = new PathString("/web-build"),
+            // ensure that these files are delivered with correct MIME type
+            godotContentTypes.Mappings[".pck"] = "application/octet-stream";
+            godotContentTypes.Mappings[".wasm"] = "application/wasm";
 
-            // Make sure they are served with the right MIME type
-            ContentTypeProvider = godotContentTypes,
-
-            // before serving the files make changes to the response
-            OnPrepareResponse = ctx =>
+            // serve static files and pass in options
+            app.UseStaticFiles(new StaticFileOptions
             {
-                // headers that are required while serving Godot web-build
-                ctx.Context.Response.Headers.Append("Cross-Origin-Opener-Policy", "same-origin");
-                ctx.Context.Response.Headers.Append("Cross-Origin-Embedder-Policy", "require-corp");
-                ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
-            }
-        });
+                // Server static files using our web build provider
+                FileProvider = webBuildProvider,
 
         // TODO: Remove this. Here just for debugging, helps me confirm web build is being served
         app.UseDirectoryBrowser(new DirectoryBrowserOptions
@@ -114,6 +100,22 @@ public class Startup
             FileProvider = webBuildProvider,
             RequestPath = new PathString("/look")
         });
+                // The endpoint mapping to our web build directory
+                RequestPath = new PathString("/web-build"),
+
+                // Make sure they are served with the right MIME type
+                ContentTypeProvider = godotContentTypes,
+
+                // before serving the files make changes to the response
+                OnPrepareResponse = ctx =>
+                {
+                    // headers that are required while serving Godot web-build
+                    ctx.Context.Response.Headers.Append("Cross-Origin-Opener-Policy", "same-origin");
+                    ctx.Context.Response.Headers.Append("Cross-Origin-Embedder-Policy", "require-corp");
+                    ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+                }
+            });
+        }
 
         // Path to materials/assets used to build plane-spheres
         var materialsPath = System.Environment.GetEnvironmentVariable("MATERIALS_PATH");
