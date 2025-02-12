@@ -70,6 +70,8 @@ public class Startup
         {
             //point to a backup build in wwwroot/game, helpful for development
             webBuildProvider = new PhysicalFileProvider(env.WebRootPath + "/game");
+            // Location we expect a version of the web build to be during development
+            string devGameBuildPath = env.WebRootPath + "/result/share/PlaneSpheres/";
         }
         // Lets us map content types for files with none standard extensions
         var godotContentTypes = new FileExtensionContentTypeProvider();
