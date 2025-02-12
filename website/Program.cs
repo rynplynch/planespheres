@@ -81,6 +81,8 @@ public class Startup
         godotContentTypes.Mappings[".wasm"] = "application/wasm";
             // Check if the system link to the build exists
             if (Directory.Exists(devGameBuildPath))
+                //point to a backup build in wwwroot/result, helpful for development
+                webBuildProvider = new PhysicalFileProvider(devGameBuildPath);
             else
                 logger.LogWarning("Web build not present in wwwroot. Run 'nix build .#web-build' inside wwwroot to serve web build during development");
 
