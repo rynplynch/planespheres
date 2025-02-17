@@ -91,8 +91,6 @@
           preset = "linux"; # You need to create this preset in godot
         };
 
-        packages.web-build-wrapper = pkgs.callPackage ./pkgs/web-build-wrapper.nix {
-          web-build = self'.packages.web-build;
         };
 
         packages.web-build = pkgs.callPackage ./pkgs/web-build.nix {
