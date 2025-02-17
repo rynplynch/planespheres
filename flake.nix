@@ -91,8 +91,6 @@
           preset = "linux"; # You need to create this preset in godot
         };
 
-        };
-
         packages.web-build = pkgs.callPackage ./pkgs/web-build.nix {
           # fetch export templates, provided by godot team to help build
           export_templates = pkgs.godot_4-export-templates;
@@ -102,6 +100,19 @@
           pname = "PlaneSpheres";
           src = ./game;
           preset = "Web"; # You need to create this preset in godot
+        };
+
+        packages.dedicated-server-build = pkgs.callPackage ./pkgs/dedicated-server-build.nix {
+          # fetch export templates, provided by godot team to help build
+          export_templates = pkgs.godot_4-export-templates;
+          version = "1.0.0";
+          pname = "planespheres-dedicated-server";
+          src = ./server;
+          preset = "Linux"; # You need to create this preset in godot
+        };
+
+        packages.dedicated-server-image = pkgs.callPackage ./pkgs/dedicated-server-image.nix {
+            server = self'.packages.dedicated-server-build;
         };
 
         packages.website = pkgs.callPackage ./pkgs/website.nix {
