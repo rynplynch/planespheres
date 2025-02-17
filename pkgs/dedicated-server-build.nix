@@ -1,11 +1,8 @@
 {
-  lib,
   stdenv,
   godot_4,
-  fontconfig,
   copyDesktopItems,
   export_templates,
-  plane-spheres-materials-tar,
   pname,
   version,
   src,
