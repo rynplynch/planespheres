@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2r1quhlp637h"]
 
-[ext_resource type="Script" path="res://scenes/levels/lobby/lobby_script.gd" id="1_7pjew"]
-[ext_resource type="PackedScene" uid="uid://dw0pgca4c6no3" path="res://models/world.gltf" id="4_353wx"]
-[ext_resource type="PackedScene" uid="uid://c7tkimfmgrkov" path="res://scenes/ui/main-menu/main_scene.tscn" id="4_ba685"]
-[ext_resource type="PackedScene" uid="uid://vx3r0epkqc2c" path="res://scenes/player/player_scene.tscn" id="4_vee0r"]
+[ext_resource type="Script" path="res://scripts/main_menu_behavior.gd" id="1_2qid8"]
+[ext_resource type="PackedScene" uid="uid://c7tkimfmgrkov" path="res://scenes/main_menu_ui.tscn" id="2_cgbyj"]
+[ext_resource type="PackedScene" uid="uid://vx3r0epkqc2c" path="res://scenes/player.tscn" id="3_8qlj5"]
+[ext_resource type="PackedScene" uid="uid://dw0pgca4c6no3" path="res://models/world.gltf" id="4_0q50a"]
 
 [node name="WorldEnvironment" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.47771, 0)
-script = ExtResource("1_7pjew")
+script = ExtResource("1_2qid8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.811258, 0.584689, 0, -0.584689, -0.811258, 0, 93.1905, -124.886)
@@ -23,11 +23,11 @@ spring_length = -3.0
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -3)
 current = true
 
-[node name="MainMenu" parent="." instance=ExtResource("4_ba685")]
+[node name="MainMenu" parent="." instance=ExtResource("2_cgbyj")]
 
-[node name="Player" parent="." instance=ExtResource("4_vee0r")]
+[node name="Player" parent="." instance=ExtResource("3_8qlj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="world" parent="." instance=ExtResource("4_353wx")]
+[node name="world" parent="." instance=ExtResource("4_0q50a")]
 
 [editable path="MainMenu"]

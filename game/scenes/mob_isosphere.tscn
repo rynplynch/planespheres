@@ -1,9 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ffxgk8ym8re1"]
+[gd_scene load_steps=2 format=3 uid="uid://ffxgk8ym8re1"]
 
-[ext_resource type="Script" path="res://scenes/mobs/suzanne/suzanne_script.gd" id="1_cm6u0"]
 [ext_resource type="PackedScene" uid="uid://crwq0mk8nugox" path="res://models/suzanne.gltf" id="2_bnjxs"]
 
 [node name="Suzanne" type="Node3D"]
-script = ExtResource("1_cm6u0")
 
 [node name="suzanne" parent="." instance=ExtResource("2_bnjxs")]

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ytp2354snk1y"
-path="res://.godot/imported/Roboto-Thin.ttf-27a07e44edcb1bbe81627e2b71d8434b.fontdata"
+uid="uid://cuonpnbtpols6"
+path="res://.godot/imported/Roboto-BlackItalic.ttf-541b916d57a52f1c13af30c8e3a96239.fontdata"
 
 [deps]
 
-source_file="res://scenes/ui/font/Roboto-Thin.ttf"
-dest_files=["res://.godot/imported/Roboto-Thin.ttf-27a07e44edcb1bbe81627e2b71d8434b.fontdata"]
+source_file="res://resources/font/Roboto-BlackItalic.ttf"
+dest_files=["res://.godot/imported/Roboto-BlackItalic.ttf-541b916d57a52f1c13af30c8e3a96239.fontdata"]
 
 [params]
 

@@ -12,7 +12,7 @@ config_version=5
 
 config/name="plane-spheres"
 config/description="Control a ball on a plane! Using this project as a proof of concept on creating a multiplayer game using Godot!"
-run/main_scene="res://scenes/levels/lobby/lobby_scene.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 

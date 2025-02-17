@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2frkupo5c8pm"]
+
+[ext_resource type="Shader" path="res://materials/shaders/blue_sky.gdshader" id="1_ybr8x"]
+[ext_resource type="Script" path="res://scripts/lvl_debug_behavior.gd" id="2_puefc"]
+[ext_resource type="PackedScene" uid="uid://ffxgk8ym8re1" path="res://scenes/mob_isosphere.tscn" id="3_424q7"]
+[ext_resource type="PackedScene" uid="uid://vx3r0epkqc2c" path="res://scenes/player.tscn" id="4_bmepr"]
+[ext_resource type="PackedScene" uid="uid://dw0pgca4c6no3" path="res://models/world.gltf" id="5_1ce0w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ujik"]
+shader = ExtResource("1_ybr8x")
+shader_parameter/skyColor = Color(0.273, 0.322, 0.42, 1)
+shader_parameter/horizonColor = Color(0.276045, 0.442218, 0.378936, 1)
+
+[sub_resource type="Sky" id="Sky_vsdq1"]
+sky_material = SubResource("ShaderMaterial_6ujik")
+
+[sub_resource type="Environment" id="Environment_gmvwj"]
+background_mode = 2
+sky = SubResource("Sky_vsdq1")
+ambient_light_source = 3
+reflected_light_source = 1
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_v1v4h"]
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_gmvwj")
+camera_attributes = SubResource("CameraAttributesPhysical_v1v4h")
+script = ExtResource("2_puefc")
+
+[node name="mobs" type="Node" parent="."]
+
+[node name="Suzanne3" parent="mobs" instance=ExtResource("3_424q7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2213, 18.1556, -7.88856)
+script = null
+
+[node name="Suzanne2" parent="mobs" instance=ExtResource("3_424q7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2169, 16.3322, -5.25904)
+script = null
+
+[node name="Suzanne" parent="mobs" instance=ExtResource("3_424q7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10845, 8.16608, -2.62952)
+script = null
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="Moon" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.337214, 0.345689, 0.597793, 1)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("4_bmepr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="world" parent="." instance=ExtResource("5_1ce0w")]
+
+[editable path="mobs/Suzanne3"]
