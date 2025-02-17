@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://cv262nrcdvjc3"]
 
-[ext_resource type="Script" path="res://scenes/levels/client/client_script.gd" id="1_h0scu"]
+[ext_resource type="Script" path="res://scripts/networking_behavior.gd" id="1_ublnt"]
 
 [node name="ClientScene" type="Node2D"]
-script = ExtResource("1_h0scu")
+script = ExtResource("1_ublnt")
 
 [node name="ScreenName" type="Label" parent="."]
 offset_left = 307.0

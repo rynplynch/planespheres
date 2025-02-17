@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7tkimfmgrkov"]
 
-[ext_resource type="Theme" uid="uid://bp3adufn8nqnk" path="res://scenes/ui/ui_theme.tres" id="1_fq5xq"]
-[ext_resource type="Script" path="res://scenes/ui/main-menu/main_script.gd" id="2_jwo7e"]
+[ext_resource type="Theme" uid="uid://bp3adufn8nqnk" path="res://resources/ui_theme.tres" id="1_fq5xq"]
+[ext_resource type="Script" path="res://scripts/main_menu_ui.gd" id="2_jwo7e"]
 
 [node name="MainMenu" type="CanvasLayer"]
 
@@ -14,8 +14,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_fq5xq")
 script = ExtResource("2_jwo7e")
-lvl0Scene = "res://scenes/levels/lvl0/lvl0.tscn"
-clientScene = "res://scenes/levels/client/client_scene.tscn"
+lvlDebug = "res://scenes/lvl_debug.tscn"
+clientScene = "res://scenes/networking.tscn"
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 1
