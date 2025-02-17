@@ -15,6 +15,9 @@
   godot-build = stdenv.mkDerivation rec {
     inherit pname version src desktopItems;
 
+    # TODO: make it so Godot looks for this attribute via an environment variable.
+    port = "2000";
+
     buildInputs = [
       copyDesktopItems
       godot_4
