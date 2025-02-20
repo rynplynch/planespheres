@@ -39,6 +39,11 @@
       # different systems that we support, need other machines for testing
       systems = ["x86_64-linux"];
 
+      imports = [
+        # import the flake module of process-compose
+        inputs.process-compose-flake.flakeModule
+      ];
+
       # helper function that handles ${system} for us
       perSystem = {
         pkgs,
