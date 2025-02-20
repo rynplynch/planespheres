@@ -8,6 +8,9 @@
     # create and manages process
     process-compose-flake.url = "github:Platonic-Systems/process-compose-flake";
 
+    # create packages from process?
+    services-flake.url = "github:juspay/services-flake";
+
     # use 'nix flake update' to bump the version of nixpkgs used
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 

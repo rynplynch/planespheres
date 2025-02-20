@@ -114,7 +114,24 @@
         "nixpkgs": "nixpkgs",
         "nuget-packageslock2nix": "nuget-packageslock2nix",
         "plane-spheres-materials": "plane-spheres-materials",
-        "plane-spheres-materials-tar": "plane-spheres-materials-tar"
+        "plane-spheres-materials-tar": "plane-spheres-materials-tar",
+        "process-compose-flake": "process-compose-flake",
+        "services-flake": "services-flake"
+      }
+    },
+    "services-flake": {
+      "locked": {
+        "lastModified": 1739666347,
+        "narHash": "sha256-tcU4M4yHYnof/7lD+LdEE19IkCHliDHwJKgRVSnaFzw=",
+        "owner": "juspay",
+        "repo": "services-flake",
+        "rev": "ed01b9c9f6686a11876799875eb8c5367161903e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "juspay",
+        "repo": "services-flake",
+        "type": "github"
       }
     }
   },
