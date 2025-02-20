@@ -5,6 +5,9 @@
     # helpful tools for maintaining the flake
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    # create and manages process
+    process-compose-flake.url = "github:Platonic-Systems/process-compose-flake";
+
     # use 'nix flake update' to bump the version of nixpkgs used
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
