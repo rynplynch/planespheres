@@ -144,6 +144,16 @@
           website = self'.packages.website;
         };
 
+        # use process-compose to create a new service
+        process-compose."myservices" = {config, ...}: {
+          imports = [
+            # allows use to create our own service
+            inputs.services-flake.processComposeModules.default
+            # imports the postgres service our service depends on
+            inputs.self.processComposeModules.default
+          ];
+        };
+
         # use 'nix fmt' before committing changes in git
         formatter = pkgs.alejandra;
 
