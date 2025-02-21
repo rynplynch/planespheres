@@ -151,6 +151,8 @@
             inputs.services-flake.processComposeModules.default
             # imports the postgres service our service depends on
             inputs.self.processComposeModules.default
+            # import the nakama service that uses the nakama pkg
+            ./pkgs/nakama.nix
           ];
         };
 
