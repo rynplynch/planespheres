@@ -145,7 +145,7 @@
         };
 
         # use process-compose to create a new service
-        process-compose."myservices" = {config, ...}: {
+        process-compose."nakama" = {config, ...}: {
           imports = [
             # allows use to create our own service
             inputs.services-flake.processComposeModules.default
