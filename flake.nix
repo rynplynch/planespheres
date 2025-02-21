@@ -126,7 +126,7 @@
         };
 
         packages.dedicated-server-image = pkgs.callPackage ./pkgs/dedicated-server-image.nix {
-            server = self'.packages.dedicated-server-build;
+          server = self'.packages.dedicated-server-build;
         };
 
         packages.website = pkgs.callPackage ./pkgs/website.nix {
