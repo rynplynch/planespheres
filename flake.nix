@@ -5,6 +5,12 @@
     # helpful tools for maintaining the flake
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    # create and manages process
+    process-compose-flake.url = "github:Platonic-Systems/process-compose-flake";
+
+    # create packages from process?
+    services-flake.url = "github:juspay/services-flake";
+
     # use 'nix flake update' to bump the version of nixpkgs used
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -32,6 +38,14 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       # different systems that we support, need other machines for testing
       systems = ["x86_64-linux"];
+
+      imports = [
+        # import the flake module of process-compose
+        inputs.process-compose-flake.flakeModule
+      ];
+
+      flake.processComposeModules.default =
+        import ./services.nix {inherit inputs;};
 
       # helper function that handles ${system} for us
       perSystem = {
@@ -112,7 +126,7 @@
         };
 
         packages.dedicated-server-image = pkgs.callPackage ./pkgs/dedicated-server-image.nix {
-            server = self'.packages.dedicated-server-build;
+          server = self'.packages.dedicated-server-build;
         };
 
         packages.website = pkgs.callPackage ./pkgs/website.nix {
@@ -128,6 +142,16 @@
 
         packages.website-image = pkgs.callPackage ./pkgs/website-image.nix {
           website = self'.packages.website;
+        };
+
+        # use process-compose to create a new service
+        process-compose."myservices" = {config, ...}: {
+          imports = [
+            # allows use to create our own service
+            inputs.services-flake.processComposeModules.default
+            # imports the postgres service our service depends on
+            inputs.self.processComposeModules.default
+          ];
         };
 
         # use 'nix fmt' before committing changes in git
