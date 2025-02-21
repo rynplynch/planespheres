@@ -44,6 +44,9 @@
         inputs.process-compose-flake.flakeModule
       ];
 
+      flake.processComposeModules.default =
+        import ./services.nix {inherit inputs;};
+
       # helper function that handles ${system} for us
       perSystem = {
         pkgs,
