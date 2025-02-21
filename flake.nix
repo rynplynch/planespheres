@@ -154,6 +154,7 @@
             # import the nakama service that uses the nakama pkg
             ./pkgs/nakama.nix
           ];
+          services.nakama.enable = true;
         };
 
         # use 'nix fmt' before committing changes in git
