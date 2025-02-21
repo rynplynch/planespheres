@@ -6,6 +6,8 @@
 }: {
   options = {
     services.nakama = {
+      enable = lib.mkEnableOption "Enable nakama service";
+      package = lib.mkPackageOption pkgs "nakama" {};
     };
   };
 
