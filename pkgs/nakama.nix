@@ -16,6 +16,11 @@
   in
     lib.mkIf cfg.enable {
       settings.processes = {
+        init = {
+          command = "${lib.getExe cfg.package} migrate up --database.address ${config.services.postgres.pg.connectionURI {dbName = "planespheres";}}";
+          # this is checking the health of the postgres service found in services.nix
+          depends_on."pg".condition = "process_healthy";
+        };
       };
     };
 }
