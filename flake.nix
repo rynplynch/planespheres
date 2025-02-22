@@ -11,6 +11,12 @@
     # create packages from process?
     services-flake.url = "github:juspay/services-flake";
 
+    # Nakama source code for Godot integration with nakama service
+    nakama-godot = {
+      url = "github:heroiclabs/nakama-godot";
+      flake = false;
+    };
+
     # use 'nix flake update' to bump the version of nixpkgs used
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
