@@ -24,7 +24,7 @@
           depends_on."pg".condition = "process_healthy";
         };
         nakama = {
-            command = "
+          command = "
             ${lib.getExe cfg.package} --database.address planespheres:myserver@127.0.0.1:5432
             ";
           # only run after the init command is done
