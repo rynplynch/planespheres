@@ -16,6 +16,9 @@ mono_crash.*.json
 # Large assets for textures etc.
 materials/
 
+# External software which adds features to Godot
+addons/
+
 # not sure what these are for, ignoring for now
 ./.envrc
 ./.gitattributes
