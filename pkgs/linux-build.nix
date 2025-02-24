@@ -1,5 +1,6 @@
 {
   lib,
+  nakama-godot,
   stdenv,
   godot_4,
   fontconfig,
@@ -41,7 +42,13 @@
 
       ln -s ${exportTemplates} /build/.local/share/godot/export_templates/4.3.stable
 
+      # PlaneSpheres expects assets at this location, eg. for textures
       ln -s ${plane-spheres-materials-tar}/store/*source/ /build/game/materials
+
+      mkdir -p /build/game/addons/com.heroiclabs.nakama
+
+      # PlaneSpheres expects the Nakama add on at this location.
+      ln -s ${nakama-godot}/addons/com.heroiclabs.nakama /build/game/addons/com.heroiclabs.nakama/
 
       mkdir -p $out/share/${pname}
       godot4 --headless --export-${exportMode} "${preset}" \
