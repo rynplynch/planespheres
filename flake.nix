@@ -169,6 +169,19 @@
         # development environment used to work on dotnet source code
         # enter using 'nix develop'
         devShells.default = pkgs.mkShell {
+          shellHook = ''
+            # this allows for running 'nix develop' in 1 directory bellow the root
+            # if the directory doesn't exist
+            if [ ! -d ./game/addons ]; then
+            # then move up in the hierarchy
+              cd ../
+            fi
+            # remove old system link
+            rm ./game/addons/com.heroiclabs.nakama
+            # Allows the use of the Nakama Godot add on during development.
+            # This circumvents the Godot packet manager.
+            ln -s ${inputs.nakama-godot}/addons/com.heroiclabs.nakama ./game/addons
+          '';
           buildInputs = [
             # used for developing the game itself
             pkgs.godot_4
