@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+Networking="*res://scripts/singletons/networking.gd"
 
 [display]
 
