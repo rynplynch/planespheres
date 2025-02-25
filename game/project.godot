@@ -37,6 +37,7 @@ import/blender/enabled=false
 [gui]
 
 theme/default_theme_scale=2.0
+theme/custom="res://resources/ui_theme.tres"
 [input]
 
 player_forward={
