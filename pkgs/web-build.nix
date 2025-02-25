@@ -1,5 +1,6 @@
 {
   lib,
+  nakama-godot,
   stdenv,
   godot_4,
   uutils-coreutils-noprefix,
@@ -41,6 +42,11 @@
       ln -s ${plane-spheres-materials-tar}/store/*source/ /build/game/materials
 
       mkdir -p $out/share/${pname}
+
+      mkdir -p /build/game/addons/com.heroiclabs.nakama
+
+      # PlaneSpheres expects the Nakama add on at this location.
+      ln -s ${nakama-godot}/addons/com.heroiclabs.nakama /build/game/addons/com.heroiclabs.nakama/
 
       # Generate the build files
       godot4 --headless --export-${exportMode} "${preset}" \
