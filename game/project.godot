@@ -38,6 +38,7 @@ import/blender/enabled=false
 
 theme/default_theme_scale=2.0
 theme/custom="res://resources/ui_theme.tres"
+theme/custom_font="res://resources/font/Roboto-Black.ttf"
 [input]
 
 player_forward={
