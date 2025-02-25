@@ -39,6 +39,9 @@ import/blender/enabled=false
 theme/default_theme_scale=2.0
 theme/custom="res://resources/ui_theme.tres"
 theme/custom_font="res://resources/font/Roboto-Black.ttf"
+theme/default_font_multichannel_signed_distance_field=true
+theme/default_font_generate_mipmaps=true
+
 [input]
 
 player_forward={
