@@ -1,30 +1,45 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bp3adufn8nqnk"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bp3adufn8nqnk"]
 
 [ext_resource type="FontFile" uid="uid://df73sjla88t3y" path="res://resources/font/Roboto-Medium.ttf" id="1_8xlir"]
 [ext_resource type="FontFile" uid="uid://bhs5gxdk0gogh" path="res://resources/font/Roboto-Regular.ttf" id="2_o77io"]
-[ext_resource type="FontFile" uid="uid://b1mdfcn1a4lq6" path="res://resources/font/Roboto-MediumItalic.ttf" id="3_xhunu"]
+[ext_resource type="FontFile" uid="uid://c0mwvccpsasfw" path="res://resources/font/Roboto-Black.ttf" id="3_ajyqw"]
 [ext_resource type="FontFile" uid="uid://1ye2101oqet1" path="res://resources/font/Roboto-Bold.ttf" id="4_aua4g"]
 [ext_resource type="FontFile" uid="uid://cuonpnbtpols6" path="res://resources/font/Roboto-BlackItalic.ttf" id="5_lunki"]
+[ext_resource type="FontFile" uid="uid://343tive3ymvh" path="res://resources/font/Roboto-ThinItalic.ttf" id="6_h22fa"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ui87k"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+color = Color(0.596368, 0.596367, 0.596367, 1)
+thickness = 2
 
 [resource]
 Fonts/font_sizes/large = 100
 Fonts/font_sizes/normal = 30
 Fonts/fonts/large = ExtResource("1_8xlir")
 Fonts/fonts/normal = ExtResource("2_o77io")
+HSeparator/constants/separation = 14
+HSeparator/styles/separator = SubResource("StyleBoxLine_ui87k")
 HeaderLarge/base_type = &"Label"
 HeaderLarge/colors/font_color = Color(0.792157, 0.486275, 0.533333, 1)
 HeaderLarge/colors/font_outline_color = Color(0, 0, 0, 1)
 HeaderLarge/font_sizes/font_size = 100
 HeaderLarge/fonts/font = null
+HeaderMedium/font_sizes/font_size = 42
 HeaderSmall/base_type = &"Label"
 HeaderSmall/colors/font_color = Color(0.881072, 0.881072, 0.881072, 1)
 HeaderSmall/font_sizes/font_size = 30
-HeaderSmall/fonts/font = ExtResource("3_xhunu")
+HeaderSmall/fonts/font = ExtResource("3_ajyqw")
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 90
 Label/fonts/font = ExtResource("4_aua4g")
 LinkButton/font_sizes/font_size = 25
 LinkButton/fonts/font = ExtResource("5_lunki")
+Logging/base_type = &"Label"
+Logging/font_sizes/font_size = 18
+Logging/fonts/font = ExtResource("6_h22fa")
 MenuButton/colors/font_color = Color(0, 0, 0, 1)
 MenuButton/font_sizes/font_size = 40
 MenuButton/fonts/font = ExtResource("2_o77io")
