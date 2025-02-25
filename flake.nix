@@ -118,6 +118,9 @@
           # fetch export templates, provided by godot team to help build
           export_templates = pkgs.godot_4-export-templates;
 
+          # Nakama Godot source code to interface with Nakama service
+          nakama-godot = inputs.nakama-godot;
+
           plane-spheres-materials-tar = inputs.plane-spheres-materials-tar;
           version = "1.0.0";
           pname = "PlaneSpheres";
