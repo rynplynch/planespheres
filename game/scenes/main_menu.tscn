@@ -23,11 +23,7 @@ spring_length = -3.0
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -3)
 current = true
 
-[node name="MainMenu" parent="." instance=ExtResource("2_cgbyj")]
-
 [node name="Player" parent="." instance=ExtResource("3_8qlj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="world" parent="." instance=ExtResource("4_0q50a")]
-
-[editable path="MainMenu"]
