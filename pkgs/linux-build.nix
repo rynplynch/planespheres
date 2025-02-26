@@ -45,10 +45,10 @@
       # PlaneSpheres expects assets at this location, eg. for textures
       ln -s ${plane-spheres-materials-tar}/store/*source/ /build/game/materials
 
-      mkdir -p /build/game/addons/com.heroiclabs.nakama
+      mkdir -p /build/game/addons
 
-      # PlaneSpheres expects the Nakama add on at this location.
-      ln -s ${nakama-godot}/addons/com.heroiclabs.nakama /build/game/addons/com.heroiclabs.nakama/
+      # Godot requires that the add on files are physically copied over
+      cp -r ${nakama-godot}/addons/com.heroiclabs.nakama /build/game/addons
 
       mkdir -p $out/share/${pname}
       godot4 --headless --export-${exportMode} "${preset}" \

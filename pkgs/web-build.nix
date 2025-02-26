@@ -43,10 +43,10 @@
 
       mkdir -p $out/share/${pname}
 
-      # Where 3rd party software is located here
+      # Where 3rd party software is located
       mkdir -p /build/game/addons
 
-      # The web build requires that the add on files are physically copied over
+      # The Godot requires that the add on files are physically copied over
       cp -r ${nakama-godot}/addons/com.heroiclabs.nakama /build/game/addons
 
       # Generate the build files
