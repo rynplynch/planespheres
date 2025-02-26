@@ -19,7 +19,7 @@ session_button_path = NodePath("CenterContainer/PanelContainer/MarginContainer/V
 socket_button_path = NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/CreateSocket")
 create_client_path = "res://scenes/ui_modules/create_client.tscn"
 create_session_path = "res://scenes/ui_modules/create_session.tscn"
-main_menu_ui = "res://scenes/main_menu_ui.tscn"
+main_menu_path = "res://scenes/main_menu.tscn"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
