@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv262nrcdvjc3"]
+[gd_scene load_steps=2 format=3 uid="uid://cv262nrcdvjc3"]
 
 [ext_resource type="Script" path="res://scripts/networking_behavior.gd" id="1_ublnt"]
-[ext_resource type="PackedScene" uid="uid://dewwpx07au31w" path="res://scenes/networking_ui.tscn" id="2_hcs42"]
 
 [node name="Networking" type="Node3D"]
 script = ExtResource("1_ublnt")
-
-[node name="NetworkingUi" parent="." instance=ExtResource("2_hcs42")]
-networking_menu_path = "res://scenes/ui_modules/networking_menu.tscn"
+networking_ui_path = "res://scenes/networking_ui.tscn"
 
 [node name="CameraTarget" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1059, 0)
