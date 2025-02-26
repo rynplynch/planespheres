@@ -76,7 +76,7 @@ func update_client_status() -> bool:
 # Check the status of the Network.session and update UI elements
 func update_session_status() -> bool:
 	# if the player has a valid session
-	if Networking.session && Networking.session.is_valid():
+	if Networking.is_session_valid(Networking.session):
 		# toggle the check box in the affirmative
 		session_status.set_pressed_no_signal(true)
 		# give the player further feedback
