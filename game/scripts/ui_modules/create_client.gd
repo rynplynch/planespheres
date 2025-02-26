@@ -43,6 +43,9 @@ func _on_create_client_pressed() -> void:
 	# save the client config
 	Networking.client = client
 	
+	_on_go_to_network_menu_pressed()
+
+func _on_go_to_network_menu_pressed() -> void:
 	# load the networking menu UI module into the scene tree
 	self.get_parent().add_child(networking_menu.instantiate())
 	
