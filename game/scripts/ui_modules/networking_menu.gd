@@ -83,6 +83,13 @@ func update_session_status() -> bool:
 	
 	session_status.set_pressed_no_signal(false)
 	logger.text = "You must create a new session"	
+	
+	# Show only the session button
+	session_button.show()
+	# Make sure the others are hidden
+	client_button.hide()
+	socket_button.hide()
+	
 	return false
 
 # Check the status of the Network.socket and update UI elements
