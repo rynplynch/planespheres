@@ -16,10 +16,15 @@ run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+Networking="*res://scripts/singletons/networking.gd"
+
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=3840
+window/size/viewport_height=2160
 
 [dotnet]
 
@@ -28,6 +33,14 @@ project/assembly_name="ball-on-plane"
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/default_theme_scale=2.0
+theme/custom="res://resources/ui_theme.tres"
+theme/custom_font="res://resources/font/Roboto-Black.ttf"
+theme/default_font_multichannel_signed_distance_field=true
+theme/default_font_generate_mipmaps=true
 
 [input]
 

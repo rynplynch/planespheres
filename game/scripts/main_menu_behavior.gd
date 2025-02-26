@@ -2,6 +2,9 @@ extends Node3D
 
 @export var cam_speed = 0.1
 
+@export_file("*.tscn") var main_menu_ui_path
+@onready var main_menu_ui : PackedScene = load(main_menu_ui_path)
+
 # all parts related to the camera
 # the camera itself
 var cam : Camera3D
@@ -23,6 +26,9 @@ var mag = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Load main menu UI
+	self.add_child(main_menu_ui.instantiate())
+	
 	cam_target = $"CameraTarget"
 	cam_spring = $"CameraTarget/SpringArm3D"
 	cam = $"CameraTarget/SpringArm3D/Camera3D"

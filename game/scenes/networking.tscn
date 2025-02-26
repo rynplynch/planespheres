@@ -2,19 +2,16 @@
 
 [ext_resource type="Script" path="res://scripts/networking_behavior.gd" id="1_ublnt"]
 
-[node name="ClientScene" type="Node2D"]
+[node name="Networking" type="Node3D"]
 script = ExtResource("1_ublnt")
+networking_ui_path = "res://scenes/networking_ui.tscn"
 
-[node name="ScreenName" type="Label" parent="."]
-offset_left = 307.0
-offset_top = 188.0
-offset_right = 347.0
-offset_bottom = 211.0
-text = "ALSKDJASLKD"
+[node name="CameraTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1059, 0)
 
-[node name="SessionToken" type="Label" parent="."]
-offset_left = 375.0
-offset_top = 95.0
-offset_right = 415.0
-offset_bottom = 118.0
-text = "HHHHH"
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraTarget"]
+spring_length = -3.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraTarget/SpringArm3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -3)
+current = true

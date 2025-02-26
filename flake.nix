@@ -11,6 +11,12 @@
     # create packages from process?
     services-flake.url = "github:juspay/services-flake";
 
+    # Nakama source code for Godot integration with nakama service
+    nakama-godot = {
+      url = "github:heroiclabs/nakama-godot";
+      flake = false;
+    };
+
     # use 'nix flake update' to bump the version of nixpkgs used
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -98,6 +104,9 @@
           # fetch export templates, provided by godot team to help build
           export_templates = pkgs.godot_4-export-templates;
 
+          # Nakama Godot source code to interface with Nakama service
+          nakama-godot = inputs.nakama-godot;
+
           plane-spheres-materials-tar = inputs.plane-spheres-materials-tar;
           version = "1.0.0";
           pname = "linux_template";
@@ -108,6 +117,9 @@
         packages.web-build = pkgs.callPackage ./pkgs/web-build.nix {
           # fetch export templates, provided by godot team to help build
           export_templates = pkgs.godot_4-export-templates;
+
+          # Nakama Godot source code to interface with Nakama service
+          nakama-godot = inputs.nakama-godot;
 
           plane-spheres-materials-tar = inputs.plane-spheres-materials-tar;
           version = "1.0.0";
@@ -163,6 +175,19 @@
         # development environment used to work on dotnet source code
         # enter using 'nix develop'
         devShells.default = pkgs.mkShell {
+          shellHook = ''
+            # this allows for running 'nix develop' in 1 directory bellow the root
+            # if the directory doesn't exist
+            if [ ! -d ./game/addons ]; then
+            # then move up in the hierarchy
+              cd ../
+            fi
+            # remove old system link
+            rm ./game/addons/com.heroiclabs.nakama
+            # Allows the use of the Nakama Godot add on during development.
+            # This circumvents the Godot packet manager.
+            ln -s ${inputs.nakama-godot}/addons/com.heroiclabs.nakama ./game/addons
+          '';
           buildInputs = [
             # used for developing the game itself
             pkgs.godot_4

@@ -18,6 +18,22 @@
         "type": "github"
       }
     },
+    "nakama-godot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1739214631,
+        "narHash": "sha256-ZnETA6YbaleJuGgR7m6DnlLrQT8FWjTHM2wLnnrx4Is=",
+        "owner": "heroiclabs",
+        "repo": "nakama-godot",
+        "rev": "5a362febf04208202102321988566d615e87292e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "heroiclabs",
+        "repo": "nakama-godot",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1739214665,
@@ -111,6 +127,7 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "nakama-godot": "nakama-godot",
         "nixpkgs": "nixpkgs",
         "nuget-packageslock2nix": "nuget-packageslock2nix",
         "plane-spheres-materials": "plane-spheres-materials",

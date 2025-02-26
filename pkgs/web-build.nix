@@ -1,5 +1,6 @@
 {
   lib,
+  nakama-godot,
   stdenv,
   godot_4,
   uutils-coreutils-noprefix,
@@ -41,6 +42,12 @@
       ln -s ${plane-spheres-materials-tar}/store/*source/ /build/game/materials
 
       mkdir -p $out/share/${pname}
+
+      # Where 3rd party software is located
+      mkdir -p /build/game/addons
+
+      # The Godot requires that the add on files are physically copied over
+      cp -r ${nakama-godot}/addons/com.heroiclabs.nakama /build/game/addons
 
       # Generate the build files
       godot4 --headless --export-${exportMode} "${preset}" \
