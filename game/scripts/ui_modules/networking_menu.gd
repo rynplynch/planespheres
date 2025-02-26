@@ -2,18 +2,35 @@ extends Control
 
 # select appropriate node via the editor
 @export_node_path("Label") var logger_path : NodePath
+@export_node_path("CheckBox") var client_status_path : NodePath
 @export_node_path("CheckBox") var session_status_path : NodePath
 @export_node_path("CheckBox") var socket_status_path : NodePath 
+@export_node_path("Button") var client_button_path : NodePath 
+@export_node_path("Button") var session_button_path : NodePath 
+@export_node_path("Button") var socket_button_path : NodePath 
+@export_file("*.tscn") var create_client_path : String
 @export_file("*.tscn") var create_session_path : String
+@export_file("*.tscn") var main_menu_path : String
+
+# main menu UI scene to swap out networking UI scene
+@onready var main_menu : PackedScene = load(main_menu_path)
+
+# module UI elements we load in to alter Networking singleton
+@onready var create_client : PackedScene = load(create_client_path)
 @onready var create_session : PackedScene = load(create_session_path)
 
 # used to provide feedback to the user
 @onready var logger : Label = get_node(logger_path)
 
 # used to display network element statuses
+@onready var client_status : CheckBox = get_node(client_status_path)
 @onready var session_status : CheckBox = get_node(session_status_path)
 @onready var socket_status : CheckBox = get_node(socket_status_path)
 
+# used to show buttons as the player needs the
+@onready var client_button : Button = get_node(client_button_path)
+@onready var session_button : Button = get_node(session_button_path)
+@onready var socket_button : Button = get_node(socket_button_path)
 
 func _ready() -> void:
 	# don't show the socket checkbox until our session is valid
