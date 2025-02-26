@@ -33,13 +33,15 @@ extends Control
 @onready var socket_button : Button = get_node(socket_button_path)
 
 func _ready() -> void:
-	# don't show the socket checkbox until our session is valid
-	socket_status.hide()
-	
-	# if our session is ready
-	if update_session_status():
-		# also check if we have a socket free
-		update_socket_status()	
+	# start these button as hidden
+	client_button.hide()
+	session_button.hide()
+	socket_button.hide()
+
+	if await update_client_status() \
+	&& update_session_status():
+	#&& update_socket_status():
+		pass
 	
 	#logging.text = logging.text + "Session created!\n" + "Attempting socket creation...\n"
 	#var socket = Nakama.create_socket_from(client)
