@@ -19,8 +19,6 @@ extends Control
 @onready var port_input : SpinBox = get_node(port_path)
 @onready var schema_input : OptionButton = get_node(schema_path)
 
-# signal we created upon succesful creation of a session
-signal session_created
 
 func _on_create_session_pressed() -> void:
 	# extract client config from ui
