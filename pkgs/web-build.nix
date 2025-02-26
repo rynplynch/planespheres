@@ -43,10 +43,11 @@
 
       mkdir -p $out/share/${pname}
 
-      mkdir -p /build/game/addons/com.heroiclabs.nakama
+      # Where 3rd party software is located here
+      mkdir -p /build/game/addons
 
-      # PlaneSpheres expects the Nakama add on at this location.
-      ln -s ${nakama-godot}/addons/com.heroiclabs.nakama /build/game/addons/com.heroiclabs.nakama/
+      # The web build requires that the add on files are physically copied over
+      cp -r ${nakama-godot}/addons/com.heroiclabs.nakama /build/game/addons
 
       # Generate the build files
       godot4 --headless --export-${exportMode} "${preset}" \
