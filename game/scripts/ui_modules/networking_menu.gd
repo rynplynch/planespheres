@@ -69,3 +69,12 @@ func _on_go_to_session_pressed() -> void:
 
 	# remove the networking menu UI from the scene tree
 	self.queue_free()
+
+
+func _on_configure_client_pressed() -> void:
+	# load the create session UI model into the scene tree
+	get_parent().add_child(create_client.instantiate())
+
+	# remove the networking menu UI from the scene tree
+	self.queue_free()
+
