@@ -79,12 +79,9 @@ func update_session_status() -> bool:
 	if Networking.is_session_valid(Networking.session):
 		# toggle the check box in the affirmative
 		session_status.set_pressed_no_signal(true)
-		# give the player further feedback
-		session_status.text = "Your session is valid!"
 		return true
 	
 	session_status.set_pressed_no_signal(false)
-	session_status.text = "You don't have a valid session!"
 	logger.text = "You must create a new session"	
 	return false
 
