@@ -46,6 +46,30 @@ func _ready() -> void:
 	#
 	#logging.text = logging.text + "Socket created!\n" + "Attempting socket connection...\n"
 	#socket.connect_async(session)
+
+# Check the status of the Network.client and update UI elements
+func update_client_status() -> bool:
+	# grab users client object
+	var client : NakamaClient = Networking.client
+	
+	# use helper function to test client
+	if await Networking.is_client_valid(client):
+		# toggle the check box in the affirmative
+		client_status.set_pressed_no_signal(true)
+		return true
+	
+	# toggle check box in the negative
+	client_status.set_pressed_no_signal(false)
+	# give the user feedback
+	logger.text = "You must configure a new client."
+	
+	# Show only the configure client button
+	client_button.show()
+	# Make sure the others are hidden
+	session_button.hide()
+	socket_button.hide()
+	
+	return false
 	
 # Check the status of the Network.session and update UI elements
 func update_session_status() -> bool:
