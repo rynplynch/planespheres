@@ -7,10 +7,15 @@ extends Control
 
 # select appropriate node via the editor, gets user input
 @export_node_path("Label") var logger_path : NodePath
+@export_node_path("LineEdit") var email_path : NodePath
+@export_node_path("LineEdit") var password_path : NodePath
 
 # used to provide feedback to the user
 @onready var logging : Label = get_node(logger_path)
 
+# credentials the client will use to grab a session token
+@onready var email_input : LineEdit = get_node(email_path)
+@onready var password_input : LineEdit = get_node(password_path)
 
 
 func _on_create_session_pressed() -> void:
