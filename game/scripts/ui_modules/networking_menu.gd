@@ -128,3 +128,6 @@ func _on_configure_client_pressed() -> void:
 
 func _on_return_to_main_pressed() -> void:
 	get_tree().change_scene_to_packed(main_menu)
+	
+	# remove the networking menu UI from the scene tree
+	self.queue_free()
