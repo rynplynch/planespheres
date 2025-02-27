@@ -26,22 +26,15 @@ func _on_create_client_pressed() -> void:
 	var port = int(port_input.get_line_edit().text)
 	var schema = schema_input.text
 	
-	# send user feedback
-	logging.text = "Creating client.\n"
-	# create the client
-	var client = Nakama.create_client("defaultkey", address, port, schema)
+	# attempt client creation
+	var client = await Networking.create_client(address,port,schema,logging)
 	
-	# use Networking singletons helper function to test client
-	if  !await Networking.is_client_valid(client):
-		# let user know their client doesn't work
-		logging.text = logging.text + "Client failed to connect to server.\n"
-		# give them troubleshooting info
-		logging.text = logging.text + "It's possible your settings are bad or the server is down\n"
-		# break from the function
+	# if client is null creation failed
+	if !client:
 		return
-
+	
 	# save the client config
-	Networking.client = client
+	Networking._client = client
 	
 	_on_go_to_network_menu_pressed()
 
