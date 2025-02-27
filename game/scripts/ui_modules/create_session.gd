@@ -50,7 +50,35 @@ func _on_create_session_pressed() -> void:
 
 	_on_go_to_network_menu_pressed()
 
+func _on_create_account_pressed() -> void:
+	# extract client config from ui
+	var email = email_input.text
+	var password = password_input.text
 
+	logging.text = "Attempting account creation...\n"
+
+	# grab client
+	var client = Networking.client
+
+	# make sure the user has a working client
+	if !await Networking.is_client_valid(client):
+		logging.text = logging.text + "Your client is not valid.\n" + "Create a new client.\n"
+		return
+
+	# ask nakama for a session token
+	var session = await client.authenticate_email_async(email, password, null, true, null)
+
+	# catch exception and inform the user
+	if session.is_exception():
+		logging.text = logging.text + "ERROR: " + str(session.get_exception().message)
+		return
+	
+	if session.created:
+		logging.text = logging.text + "Account created!"
+		return
+		
+	logging.text = logging.text + "Account already exits."
+	
 func _on_go_to_network_menu_pressed() -> void:
 	# load the networking menu UI module into the scene tree
 	self.get_parent().add_child(networking_menu.instantiate())
