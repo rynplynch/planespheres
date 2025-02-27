@@ -23,33 +23,12 @@ func create_client(address : String, port : int, schema : String, logging : Cont
 	
 	return client
 
-# Attempt account creation
-func create_account(client : NakamaClient, email : String, password : String, logging : Control) -> void:
-	logging.text = "Attempting account creation...\n"
-
-	# make sure the user has a working client
-	if !await Networking.is_client_valid(client):
-		logging.text = logging.text + "Your client is not valid.\n" + "Create a new client.\n"
-		return
-
-	# ask nakama for a session token
-	var session = await client.authenticate_email_async(email, password, null, true, null)
-
-	# catch exception and inform the user
-	if session.is_exception():
-		logging.text = logging.text + "ERROR: " + str(session.get_exception().message)
-		return
-	
-	if session.created:
-		logging.text = logging.text + "Account created!"
-		return
-		
-	logging.text = logging.text + "Account already exits."
-	return
-	
-# Attempt session creation
-func create_session(client : NakamaClient, email : String, password : String, logging : Control) -> NakamaSession:
-	logging.text = "Attempting login...\n"
+# either return a valid session token, or create a new account depending on create bool
+func request_session_token(client : NakamaClient, email : String, password : String, create : bool ,logging : Control) -> NakamaSession:
+	if create:
+		logging.text = "Attempting account creation...\n"
+	else:
+		logging.text = "Attempting login...\n"
 
 	# make sure the user has a working client
 	if !await Networking.is_client_valid(client):
@@ -57,19 +36,30 @@ func create_session(client : NakamaClient, email : String, password : String, lo
 		return null
 
 	# ask nakama for a session token
-	var session = await client.authenticate_email_async(email, password, null, false, null)
+	var session = await client.authenticate_email_async(email, password, null, create, null)
 
 	# catch exception and inform the user
 	if session.is_exception():
 		logging.text = logging.text + "ERROR: " + str(session.get_exception().message)
 		return null
-
+	
+	# if the call was to create an account
+	if create:
+		# the account creation was successful
+		if session.created:
+			logging.text = logging.text + "Account created!"
+			return null
+		logging.text = logging.text + "Account already exits."
+		return null
+	
 	# make sure the session is valid
 	if !is_session_valid(session):
 		logging.text = logging.text + "Failed to create sesion.\n"
 		return null
-		
+	
+	logging.text = logging.text + "Session created!\n"
 	return session
+
 
 # Helper functions
 # Returns true of the client can reach a Nakama server

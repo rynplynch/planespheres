@@ -24,7 +24,7 @@ func _on_create_session_pressed() -> void:
 	var password = password_input.text
 	
 	# create session
-	var session = await Networking.create_session(Networking._client, email, password, logging)
+	var session = await Networking.request_session_token(Networking._client, email, password, false ,logging)
 	
 	# if session is null creation failed
 	if !session:
@@ -44,7 +44,7 @@ func _on_create_account_pressed() -> void:
 	var client = Networking._client
 	
 	# create account
-	Networking.create_account(client, email, password, logging)
+	Networking.request_session_token(client, email, password, true, logging)
 	
 func _on_go_to_network_menu_pressed() -> void:
 	# load the networking menu UI module into the scene tree
