@@ -1,8 +1,8 @@
 extends Node
 
-var client : NakamaClient;
-var session : NakamaSession;
-var socket : NakamaSocket;
+var _client : NakamaClient;
+var _session : NakamaSession;
+var _socket : NakamaSocket;
 
 # Helper functions
 

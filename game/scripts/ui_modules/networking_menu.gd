@@ -52,7 +52,7 @@ func _ready() -> void:
 # Check the status of the Network.client and update UI elements
 func update_client_status() -> bool:
 	# grab users client object
-	var client : NakamaClient = Networking.client
+	var client : NakamaClient = Networking._client
 	
 	# use helper function to test client
 	if await Networking.is_client_valid(client):
@@ -76,7 +76,7 @@ func update_client_status() -> bool:
 # Check the status of the Network.session and update UI elements
 func update_session_status() -> bool:
 	# if the player has a valid session
-	if Networking.is_session_valid(Networking.session):
+	if Networking.is_session_valid(Networking._session):
 		# toggle the check box in the affirmative
 		session_status.set_pressed_no_signal(true)
 		return true
@@ -98,7 +98,7 @@ func update_socket_status():
 	socket_status.show()
 	
 	# if the player has a valid session
-	if Networking.socket && Networking.socket.is_connected_to_host():
+	if Networking._socket && Networking._socket.is_connected_to_host():
 		# toggle the check box in the affirmative
 		socket_status.set_pressed_no_signal(true)
 		# give the player further feedback
