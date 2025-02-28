@@ -33,11 +33,6 @@ extends Control
 @onready var socket_button : Button = get_node(socket_button_path)
 
 func _ready() -> void:
-	# start these button as hidden
-	client_button.hide()
-	session_button.hide()
-	socket_button.hide()
-
 	if await update_client_status() \
 	&& update_session_status():
 	#&& update_socket_status():
@@ -65,12 +60,6 @@ func update_client_status() -> bool:
 	# give the user feedback
 	logger.text = "You must configure a new client."
 	
-	# Show only the configure client button
-	client_button.show()
-	# Make sure the others are hidden
-	session_button.hide()
-	socket_button.hide()
-	
 	return false
 	
 # Check the status of the Network.session and update UI elements
@@ -84,18 +73,9 @@ func update_session_status() -> bool:
 	session_status.set_pressed_no_signal(false)
 	logger.text = "You must create a new session"	
 	
-	# Show only the session button
-	session_button.show()
-	# Make sure the others are hidden
-	client_button.hide()
-	socket_button.hide()
-	
 	return false
 
 # Check the status of the Network.socket and update UI elements
-func update_socket_status():
-	# socket checkbox is unhidden
-	socket_status.show()
 	
 	# if the player has a valid session
 	if Networking._socket && Networking._socket.is_connected_to_host():
