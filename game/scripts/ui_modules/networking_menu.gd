@@ -33,26 +33,16 @@ extends Control
 @onready var socket_button : Button = get_node(socket_button_path)
 
 func _ready() -> void:
-	# start these button as hidden
-	client_button.hide()
-	session_button.hide()
-	socket_button.hide()
-
 	if await update_client_status() \
-	&& update_session_status():
-	#&& update_socket_status():
+	&& update_session_status() \
+	&& update_socket_status():
 		pass
-	
-	#logging.text = logging.text + "Session created!\n" + "Attempting socket creation...\n"
-	#var socket = Nakama.create_socket_from(client)
-	#
-	#logging.text = logging.text + "Socket created!\n" + "Attempting socket connection...\n"
-	#socket.connect_async(session)
+
 
 # Check the status of the Network.client and update UI elements
 func update_client_status() -> bool:
 	# grab users client object
-	var client : NakamaClient = Networking.client
+	var client : NakamaClient = Networking._client
 	
 	# use helper function to test client
 	if await Networking.is_client_valid(client):
@@ -65,18 +55,12 @@ func update_client_status() -> bool:
 	# give the user feedback
 	logger.text = "You must configure a new client."
 	
-	# Show only the configure client button
-	client_button.show()
-	# Make sure the others are hidden
-	session_button.hide()
-	socket_button.hide()
-	
 	return false
 	
 # Check the status of the Network.session and update UI elements
 func update_session_status() -> bool:
 	# if the player has a valid session
-	if Networking.is_session_valid(Networking.session):
+	if Networking.is_session_valid(Networking._session):
 		# toggle the check box in the affirmative
 		session_status.set_pressed_no_signal(true)
 		return true
@@ -84,29 +68,18 @@ func update_session_status() -> bool:
 	session_status.set_pressed_no_signal(false)
 	logger.text = "You must create a new session"	
 	
-	# Show only the session button
-	session_button.show()
-	# Make sure the others are hidden
-	client_button.hide()
-	socket_button.hide()
-	
 	return false
 
 # Check the status of the Network.socket and update UI elements
-func update_socket_status():
-	# socket checkbox is unhidden
-	socket_status.show()
-	
-	# if the player has a valid session
-	if Networking.socket && Networking.socket.is_connected_to_host():
+func update_socket_status():	
+	# if the socket is connected
+	if Networking._socket_connected:
 		# toggle the check box in the affirmative
 		socket_status.set_pressed_no_signal(true)
 		# give the player further feedback
-		socket_status.text = "Looks like a socket is available!"
 		logger.text = "You may start a new game"	
 	else:
 		socket_status.set_pressed_no_signal(false)
-		socket_status.text = "No available sockets"
 		logger.text = "You must create a new socket connection"	
 
 
@@ -128,6 +101,14 @@ func _on_configure_client_pressed() -> void:
 
 func _on_return_to_main_pressed() -> void:
 	get_tree().change_scene_to_packed(main_menu)
-	
+
 	# remove the networking menu UI from the scene tree
 	self.queue_free()
+
+
+func _on_create_socket_pressed() -> void:
+	# attempt to create a new socket
+	await Networking.create_socket(Networking._client, Networking._session, logger)
+	
+	socket_status.set_pressed_no_signal(Networking._socket_connected)
+	
