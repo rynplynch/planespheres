@@ -103,6 +103,14 @@ func _on_configure_client_pressed() -> void:
 
 func _on_return_to_main_pressed() -> void:
 	get_tree().change_scene_to_packed(main_menu)
-	
+
 	# remove the networking menu UI from the scene tree
 	self.queue_free()
+
+
+func _on_create_socket_pressed() -> void:
+	# attempt to create a new socket
+	await Networking.create_socket(Networking._client, Networking._session, logger)
+	
+	socket_status.set_pressed_no_signal(Networking._socket_connected)
+	
