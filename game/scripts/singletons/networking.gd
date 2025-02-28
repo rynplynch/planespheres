@@ -60,7 +60,55 @@ func request_session_token(client : NakamaClient, email : String, password : Str
 	logging.text = logging.text + "Session created!\n"
 	return session
 
+# create a new socket connection, and register functions to respond to signals
+func create_socket(client : NakamaClient, session : NakamaSession, logging : Control) -> NakamaSocket:
+	logging.text = "Attempting socket creation\n"
+	
+	# make sure the user has a working client
+	if !await Networking.is_client_valid(client):
+		logging.text = logging.text + "Your client is not valid.\n" + "Create a new client.\n"
+		return null
+	
+	# make sure user has valid session
+	if !is_session_valid(session):
+		logging.text = logging.text + "Your session is not valid.\n" + "Create a new session.\n"
+		return null
+	
+	# create a socket
+	var socket = Nakama.create_socket_from(client)
+	
+	# register functions
+	socket.connected.connect(self._on_socket_connected)
+	socket.closed.connect(self._on_socket_closed)
+	socket.received_error.connect(self._on_socket_error)
+	
+	logging.text = logging.text + "Attempting socket connection...\n"
+	# attempt to create a socket connection
+	await socket.connect_async(session)
+	
+	if _socket_connected:
+		logging.text = logging.text + "Socket connection succesful!\n"
+		
+		# return socket reference to caller
+		return socket
+	
+	logging.test = logging.text + "Socket connection failed.\n"
+	return null
 
+# socket functions, respond to socket signals when they are emitted
+func _on_socket_connected():
+	print("Socket connected\n")
+	_socket_connected = true
+	
+func _on_socket_closed():
+	print("Socket closed\n")
+	_socket.free()
+	_socket_connected = false
+	
+func _on_socket_error(err):
+	print("Socket recieved error: " + str(err) + '\n')
+	_on_socket_closed()
+	
 # Helper functions
 # Returns true of the client can reach a Nakama server
 func is_client_valid(client : NakamaClient) -> bool:
