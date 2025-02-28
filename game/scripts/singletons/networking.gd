@@ -3,6 +3,7 @@ extends Node
 var _client : NakamaClient;
 var _session : NakamaSession;
 var _socket : NakamaSocket;
+var _socket_connected : bool = false;
 
 # Creation functions
 # Attempt client creation
