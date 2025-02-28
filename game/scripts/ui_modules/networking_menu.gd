@@ -34,15 +34,10 @@ extends Control
 
 func _ready() -> void:
 	if await update_client_status() \
-	&& update_session_status():
-	#&& update_socket_status():
+	&& update_session_status() \
+	&& update_socket_status():
 		pass
-	
-	#logging.text = logging.text + "Session created!\n" + "Attempting socket creation...\n"
-	#var socket = Nakama.create_socket_from(client)
-	#
-	#logging.text = logging.text + "Socket created!\n" + "Attempting socket connection...\n"
-	#socket.connect_async(session)
+
 
 # Check the status of the Network.client and update UI elements
 func update_client_status() -> bool:
