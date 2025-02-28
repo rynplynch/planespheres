@@ -77,11 +77,9 @@ func update_socket_status():
 		# toggle the check box in the affirmative
 		socket_status.set_pressed_no_signal(true)
 		# give the player further feedback
-		socket_status.text = "Looks like a socket is available!"
 		logger.text = "You may start a new game"	
 	else:
 		socket_status.set_pressed_no_signal(false)
-		socket_status.text = "No available sockets"
 		logger.text = "You must create a new socket connection"	
 
 
