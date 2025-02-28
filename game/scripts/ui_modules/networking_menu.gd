@@ -71,9 +71,9 @@ func update_session_status() -> bool:
 	return false
 
 # Check the status of the Network.socket and update UI elements
-	
-	# if the player has a valid session
-	if Networking._socket && Networking._socket.is_connected_to_host():
+func update_socket_status():	
+	# if the socket is connected
+	if Networking._socket_connected:
 		# toggle the check box in the affirmative
 		socket_status.set_pressed_no_signal(true)
 		# give the player further feedback
