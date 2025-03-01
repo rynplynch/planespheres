@@ -192,6 +192,8 @@
             # used for developing the game itself
             pkgs.godot_4
             pkgs.blender
+            # used to develop go module for nakama
+            pkgs.go_1_23
             # used for developing the website
             pkgs.dotnetCorePackages.dotnet_9.sdk
             pkgs.dotnetCorePackages.dotnet_9.aspnetcore
