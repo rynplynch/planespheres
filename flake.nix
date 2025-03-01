@@ -37,6 +37,13 @@
       url = "github:mdarocha/nuget-packageslock2nix/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # helpful tool to manage go dependencies
+    gomod2nix = {
+      url = "github:tweag/gomod2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "utils";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
