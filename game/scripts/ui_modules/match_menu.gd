@@ -18,7 +18,7 @@ func _ready() -> void:
 	pass
 
 func _on_create_match_pressed() -> void:
-	pass # Replace with function body.
+	Rpc.create_match(logger)
 
 func _on_refresh_matches_pressed() -> void:
 	pass # Replace with function body.
