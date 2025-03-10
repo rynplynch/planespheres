@@ -48,43 +48,33 @@ func update_client_status() -> bool:
 	# grab users client object
 	var client : NakamaClient = Networking._client
 	
-	# use helper function to test client
-	if await Networking.is_client_valid(client):
-		# toggle the check box in the affirmative
-		client_status.set_pressed_no_signal(true)
-		return true
+	# Ask networking singelton if client is okay
+	var success : bool = await Networking.check_client_status(client, logger)
 	
-	# toggle check box in the negative
-	client_status.set_pressed_no_signal(false)
-	# give the user feedback
-	logger.text = "You must configure a new client."
+	# toggle check box
+	client_status.set_pressed_no_signal(success)
 	
-	return false
-	
+	return success
+
 # Check the status of the Network.session and update UI elements
 func update_session_status() -> bool:
-	# if the player has a valid session
-	if Networking.is_session_valid(Networking._session):
-		# toggle the check box in the affirmative
-		session_status.set_pressed_no_signal(true)
-		return true
+	# Ask networking singelton if session is valid
+	var success : bool = Networking.check_session_status(Networking._session, logger)
 	
-	session_status.set_pressed_no_signal(false)
-	logger.text = "You must create a new session"	
+	# additional feedback to user
+	session_status.set_pressed_no_signal(success)
 	
-	return false
-
+	return success
+	
 # Check the status of the Network.socket and update UI elements
-func update_socket_status():	
-	# if the socket is connected
-	if Networking._socket_connected:
-		# toggle the check box in the affirmative
-		socket_status.set_pressed_no_signal(true)
-		# give the player further feedback
-		logger.text = "You may start a new game"	
-	else:
-		socket_status.set_pressed_no_signal(false)
-		logger.text = "You must create a new socket connection"	
+func update_socket_status() -> bool:
+	# Ask networking singleton if socket is live
+	var success : bool = Networking.check_socket_status(logger)
+	
+	# additional feedback to user
+	socket_status.set_pressed_no_signal(success)
+	
+	return success
 
 
 func _on_go_to_session_pressed() -> void:

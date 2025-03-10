@@ -127,3 +127,42 @@ func is_client_valid(client : NakamaClient) -> bool:
 func is_session_valid(session : NakamaSession) -> bool:
 	# return true if session is not null AND is valid AND is not expired
 	return session && session.is_valid() && !session.is_expired()
+
+# Check the status of the Network.client and output logger info
+func check_client_status(client : NakamaClient, logger : Control) -> bool:
+	# Let the user know we are performing work
+	logger.text = "Checking client status...\n"
+	
+	# use helper function to test client
+	if await is_client_valid(client):
+		# give the user feedback
+		logger.text = "Your client is valid!\n"		
+		return true
+	
+	# give the user feedback
+	logger.text = "You must configure a new client.\n"
+	return false
+	
+# Check the status of the Network.session and update UI elements
+func check_session_status(session : NakamaSession, logger : Control) -> bool:
+	# Let the user know we are performing work
+	logger.text = "Checking session status...\n"
+	
+	# if the player has a valid session
+	if is_session_valid(session):
+		logger.text = logger.text + "Your session is valid!\n"
+		return true
+	
+	logger.text = logger.text + "You must create a new session.\n"	
+	return false
+
+# Check the status of the Network.socket and update UI elements
+func check_socket_status(logger : Control) -> bool:
+	# if the socket is connected
+	if _socket_connected:
+		# give the player feedback
+		logger.text = "You may start a new game"
+		return true
+	else:
+		logger.text = "You must create a new socket connection"
+		return false
