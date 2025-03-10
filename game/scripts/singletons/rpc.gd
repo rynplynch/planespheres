@@ -29,8 +29,35 @@ func create_match(logger : Control) -> bool:
 	return false
 
 # Ask the server to return a list of matches, based upon our request
-func get_matches(logger : Control) -> bool:
-	return false
+func get_matches(payload : Dictionary, logger : Control) -> Array:
+	# Everything we need to make the rpc call
+	var client : NakamaClient = Networking._client
+	var session : NakamaSession = Networking._session
+	# The name the create_match function is registered with on the server
+	var rpc_name : String = "get_matches"
+	
+	# An empty list to return in case our call fails
+	var empty : Array
+	
+	# Check to make sure we can even make the call
+	if await _is_ready(client, session, logger):
+		# Let the user know we are performing work
+		logger.text = "Attempting to get worlds...\n"
+		
+		# Attempt to call the rpc function
+		var response : NakamaAPI.ApiRpc = await client.rpc_async(session, rpc_name, JSON.stringify(payload))
+		
+		# Handle any errors
+		if response.is_exception():
+			# show the user the error
+			logger.text = logger.text + response.exception.message + '\n'
+			return empty 
+		
+		logger.text = logger.text + "Worlds updated!\n"
+		return JSON.parse_string(response.payload).matches
+	
+	# We can't make the call, Networking singleton will log info for user
+	return empty
 
 # Helper functions
 func _is_ready(client : NakamaClient, session : NakamaSession, logger : Control) -> bool:
