@@ -158,11 +158,13 @@ func check_session_status(session : NakamaSession, logger : Control) -> bool:
 
 # Check the status of the Network.socket and update UI elements
 func check_socket_status(logger : Control) -> bool:
+	# Let the user know we are performing work
+	logger.text = "Checking socket status...\n"
 	# if the socket is connected
 	if _socket_connected:
 		# give the player feedback
-		logger.text = "You may start a new game"
+		logger.text = logger.text + "You may start a new game!\n"
 		return true
 	else:
-		logger.text = "You must create a new socket connection"
+		logger.text = logger.text + "You must create a new socket connection.\n"
 		return false
