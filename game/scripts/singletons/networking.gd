@@ -22,6 +22,9 @@ func create_client(address : String, port : int, schema : String, logging : Cont
 		# break from the function
 		return null
 	
+	# save the client config
+	_client = client
+	
 	return client
 
 # either return a valid session token, or create a new account depending on create bool
@@ -59,6 +62,10 @@ func request_session_token(client : NakamaClient, email : String, password : Str
 		return null
 	
 	logging.text = logging.text + "Session created!\n"
+	
+	# save the session token
+	_session = session
+	
 	return session
 
 # create a new socket connection, and register functions to respond to signals

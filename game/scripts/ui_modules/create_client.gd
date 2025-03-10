@@ -33,9 +33,6 @@ func _on_create_client_pressed() -> void:
 	if !client:
 		return
 	
-	# save the client config
-	Networking._client = client
-	
 	_on_go_to_network_menu_pressed()
 
 func _on_go_to_network_menu_pressed() -> void:
