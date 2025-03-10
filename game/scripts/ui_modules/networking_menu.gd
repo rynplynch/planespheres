@@ -10,6 +10,7 @@ extends Control
 @export_node_path("Button") var socket_button_path : NodePath 
 @export_file("*.tscn") var create_client_path : String
 @export_file("*.tscn") var create_session_path : String
+@export_file("*.tscn") var match_menu_path : String
 @export_file("*.tscn") var main_menu_path : String
 
 # main menu UI scene to swap out networking UI scene
@@ -18,6 +19,9 @@ extends Control
 # module UI elements we load in to alter Networking singleton
 @onready var create_client : PackedScene = load(create_client_path)
 @onready var create_session : PackedScene = load(create_session_path)
+
+# module UI element for match listing and creation
+@onready var match_menu : PackedScene = load(match_menu_path)
 
 # used to provide feedback to the user
 @onready var logger : Label = get_node(logger_path)
@@ -111,4 +115,10 @@ func _on_create_socket_pressed() -> void:
 	await Networking.create_socket(Networking._client, Networking._session, logger)
 	
 	socket_status.set_pressed_no_signal(Networking._socket_connected)
-	
+
+func _on_world_menu_pressed() -> void:
+	# load the match menu UI model into the scene tree
+	get_parent().add_child(match_menu.instantiate())
+
+	# remove the networking menu UI from the scene tree
+	self.queue_free()
