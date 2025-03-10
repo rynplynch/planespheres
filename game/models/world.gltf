@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.2.70",
+		"generator":"Khronos glTF Blender I/O v4.3.47",
 		"version":"2.0"
 	},
 	"scene":0,
@@ -17,9 +17,9 @@
 			"mesh":0,
 			"name":"Plane-col",
 			"scale":[
-				100,
-				100,
-				100
+				384.0777893066406,
+				384.0777893066406,
+				384.0777893066406
 			]
 		}
 	],
