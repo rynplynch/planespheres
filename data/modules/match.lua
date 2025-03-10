@@ -90,14 +90,6 @@ function get_matches(context, payload)
     -- create a readable json object
     local json = nk.json_decode(payload)
 
-    print("test\n")
-    print("limit", json.limit)
-    print("isAuthoritative", json.isAuthoritative)
-    print("label", json.label)
-    print("min_size", json.min_size)
-    print("max_size", json.max_size)
-    print("query", json.query)
-
     -- allows the caller to alter the default search values
     if json.limit then limit = json.limit end
     if json.isAuthoritative then isAuthoritative = json.isAuthoritative end
