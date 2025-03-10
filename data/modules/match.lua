@@ -113,11 +113,6 @@ function get_matches(context, payload)
     return nk.json_encode({ matches = matches })
 end
 
--- helper functions
-function is_match_owner(context, payload)
-    return nk.json_encode({ success = false })
-end
-
 -- Nakama functions, callable only by server
 
 -- Nakama calls this function before our game is created
