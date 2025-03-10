@@ -6,7 +6,7 @@ func create_match(logger : Control) -> bool:
 	var client : NakamaClient = Networking._client
 	var session : NakamaSession = Networking._session
 	# The name the create_match function is registered with on the server
-	var rpc_name : String = "create_matchaa"
+	var rpc_name : String = "create_match"
 	
 	# Check to make sure we can even make the call
 	if await _is_ready(client, session, logger):
