@@ -62,3 +62,5 @@ func _on_return_to_networking_pressed() -> void:
 
 	# remove the match menu UI from the scene tree
 	self.queue_free()
+
+func _on_join_world_pressed() -> void:
