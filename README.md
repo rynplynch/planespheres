@@ -10,7 +10,8 @@ PlaneSpheres is a Godot4 project that utilizes [nix flakes](https://wiki.nixos.o
 
 ### Roadmap
 
-- [ ] Allow players to create and join online matches
+- [x] Allow players to create and join online matches
+- [ ] Build out online matches
 
 #### Currently Supported Builds
 
