@@ -64,3 +64,5 @@ func _on_return_to_networking_pressed() -> void:
 	self.queue_free()
 
 func _on_join_world_pressed() -> void:
+	# make sure there is an available socket
+	if Networking.check_socket_status(logger):
