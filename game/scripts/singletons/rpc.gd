@@ -54,7 +54,9 @@ func get_matches(payload : Dictionary, logger : Control) -> Array:
 			return empty 
 		
 		logger.text = logger.text + "Worlds updated!\n"
-		return JSON.parse_string(response.payload).matches
+		var matches = JSON.parse_string(response.payload).matches
+		if matches is Array:
+			return matches
 	
 	# We can't make the call, Networking singleton will log info for user
 	return empty
