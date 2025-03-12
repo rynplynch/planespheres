@@ -2,7 +2,7 @@ extends Control
 
 # select appropriate node via the editor
 @export_node_path("Label") var logger_path : NodePath
-@export_node_path("Tree") var match_list_path : NodePath
+@export_node_path("Tree") var match_list_tree_path : NodePath
 @export_file("*.tscn") var networking_menu_path : String
 
 # networking menu to swap out our match menu UI module
@@ -11,8 +11,8 @@ extends Control
 # used to provide feedback to the user
 @onready var logger : Label = get_node(logger_path)
 
-# used to display matches on the server
-@onready var match_list : Tree = get_node(match_list_path)
+# used to display certain data from match list
+@onready var match_list_tree : Tree = get_node(match_list_tree_path)
 
 func _ready() -> void:
 	pass
