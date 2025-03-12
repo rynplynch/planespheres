@@ -73,7 +73,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Refresh Worlds"
 
-[node name="ReturnToNetworking" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+[node name="JoinWorld" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join World"
+
+[node name="ReturnToNetworking2" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Networking Menu"
 
@@ -87,4 +91,5 @@ autowrap_mode = 2
 
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer/CreateMatch" to="." method="_on_create_match_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer/RefreshMatches" to="." method="_on_refresh_matches_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ReturnToNetworking" to="." method="_on_return_to_networking_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/JoinWorld" to="." method="_on_join_world_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ReturnToNetworking2" to="." method="_on_return_to_networking_pressed"]
