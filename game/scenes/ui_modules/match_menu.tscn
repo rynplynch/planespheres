@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hc6d3")
 logger_path = NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/Logger")
-match_list_path = NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/Matches")
+match_list_tree_path = NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/Matches")
 networking_menu_path = "res://scenes/ui_modules/networking_menu.tscn"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
