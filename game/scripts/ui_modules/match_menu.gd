@@ -66,12 +66,14 @@ func _on_return_to_networking_pressed() -> void:
 func _on_join_world_pressed() -> void:
 	# make sure there is an available socket
 	if Networking.check_socket_status(logger):
+		logger.text = "Attempting to join world...\n"
 		
 		# get the selected world from the tree
 		var selected : TreeItem = match_list_tree.get_selected()
 		
 		# if the user did not select a TreeItem
 		if selected == null:
+			logger.text = logger.text + "You must select a world to join."
 			return
 		
 		# the index of the selected TreeItem is the same index in the match list
@@ -85,4 +87,7 @@ func _on_join_world_pressed() -> void:
 		
 		# catch the exception
 		if joined_match.is_exception():
+			logger.text = logger.text + ("An error occurred: %s" % joined_match.exception.message)
 			return
+		
+		logger.text = logger.text + "Match Joined!"
