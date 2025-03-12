@@ -73,3 +73,6 @@ func _on_join_world_pressed() -> void:
 		# if the user did not select a TreeItem
 		if selected == null:
 			return
+		
+		# the index of the selected TreeItem is the same index in the match list
+		var match_id = match_list[selected.get_index()]["match_id"]
