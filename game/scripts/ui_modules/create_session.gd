@@ -29,10 +29,7 @@ func _on_create_session_pressed() -> void:
 	# if session is null creation failed
 	if !session:
 		return 
-		
-	# save the session token
-	Networking._session = session
-
+	
 	_on_go_to_network_menu_pressed()
 
 func _on_create_account_pressed() -> void:

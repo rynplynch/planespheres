@@ -10,6 +10,7 @@ extends Control
 @export_node_path("Button") var socket_button_path : NodePath 
 @export_file("*.tscn") var create_client_path : String
 @export_file("*.tscn") var create_session_path : String
+@export_file("*.tscn") var match_menu_path : String
 @export_file("*.tscn") var main_menu_path : String
 
 # main menu UI scene to swap out networking UI scene
@@ -18,6 +19,9 @@ extends Control
 # module UI elements we load in to alter Networking singleton
 @onready var create_client : PackedScene = load(create_client_path)
 @onready var create_session : PackedScene = load(create_session_path)
+
+# module UI element for match listing and creation
+@onready var match_menu : PackedScene = load(match_menu_path)
 
 # used to provide feedback to the user
 @onready var logger : Label = get_node(logger_path)
@@ -44,43 +48,33 @@ func update_client_status() -> bool:
 	# grab users client object
 	var client : NakamaClient = Networking._client
 	
-	# use helper function to test client
-	if await Networking.is_client_valid(client):
-		# toggle the check box in the affirmative
-		client_status.set_pressed_no_signal(true)
-		return true
+	# Ask networking singelton if client is okay
+	var success : bool = await Networking.check_client_status(client, logger)
 	
-	# toggle check box in the negative
-	client_status.set_pressed_no_signal(false)
-	# give the user feedback
-	logger.text = "You must configure a new client."
+	# toggle check box
+	client_status.set_pressed_no_signal(success)
 	
-	return false
-	
+	return success
+
 # Check the status of the Network.session and update UI elements
 func update_session_status() -> bool:
-	# if the player has a valid session
-	if Networking.is_session_valid(Networking._session):
-		# toggle the check box in the affirmative
-		session_status.set_pressed_no_signal(true)
-		return true
+	# Ask networking singelton if session is valid
+	var success : bool = Networking.check_session_status(Networking._session, logger)
 	
-	session_status.set_pressed_no_signal(false)
-	logger.text = "You must create a new session"	
+	# additional feedback to user
+	session_status.set_pressed_no_signal(success)
 	
-	return false
-
+	return success
+	
 # Check the status of the Network.socket and update UI elements
-func update_socket_status():	
-	# if the socket is connected
-	if Networking._socket_connected:
-		# toggle the check box in the affirmative
-		socket_status.set_pressed_no_signal(true)
-		# give the player further feedback
-		logger.text = "You may start a new game"	
-	else:
-		socket_status.set_pressed_no_signal(false)
-		logger.text = "You must create a new socket connection"	
+func update_socket_status() -> bool:
+	# Ask networking singleton if socket is live
+	var success : bool = Networking.check_socket_status(logger)
+	
+	# additional feedback to user
+	socket_status.set_pressed_no_signal(success)
+	
+	return success
 
 
 func _on_go_to_session_pressed() -> void:
@@ -111,4 +105,10 @@ func _on_create_socket_pressed() -> void:
 	await Networking.create_socket(Networking._client, Networking._session, logger)
 	
 	socket_status.set_pressed_no_signal(Networking._socket_connected)
-	
+
+func _on_world_menu_pressed() -> void:
+	# load the match menu UI model into the scene tree
+	get_parent().add_child(match_menu.instantiate())
+
+	# remove the networking menu UI from the scene tree
+	self.queue_free()

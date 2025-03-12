@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 Networking="*res://scripts/singletons/networking.gd"
+Rpc="*res://scripts/singletons/rpc.gd"
 
 [display]
 
