@@ -11,6 +11,8 @@ extends Control
 # used to provide feedback to the user
 @onready var logger : Label = get_node(logger_path)
 
+# used to hold matches data
+@onready var match_list : Array = []
 # used to display certain data from match list
 @onready var match_list_tree : Tree = get_node(match_list_tree_path)
 
