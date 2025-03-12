@@ -69,3 +69,7 @@ func _on_join_world_pressed() -> void:
 		
 		# get the selected world from the tree
 		var selected : TreeItem = match_list_tree.get_selected()
+		
+		# if the user did not select a TreeItem
+		if selected == null:
+			return
