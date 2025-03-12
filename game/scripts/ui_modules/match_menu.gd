@@ -17,13 +17,44 @@ extends Control
 @onready var match_list_tree : Tree = get_node(match_list_tree_path)
 
 func _ready() -> void:
-	pass
+	match_list_tree.columns = 2
+	match_list_tree.set_column_title(0, "Match ID")
+	match_list_tree.set_column_title(1, "Players")
+	match_list_tree.set_column_expand(0, true)
+	match_list_tree.set_column_expand(1, true)
+	match_list_tree.set_column_expand_ratio(0,5)
+	match_list_tree.set_column_expand_ratio(1,1)
+
 
 func _on_create_match_pressed() -> void:
 	Rpc.create_match(logger)
 
 func _on_refresh_matches_pressed() -> void:
-	pass # Replace with function body.
+	# remove any exisitng matches from the tree and list
+	match_list.clear()
+	match_list_tree.clear()
+	var root = match_list_tree.create_item()
+	
+	# properties used to query the nakama server
+	var payload = {
+	"limit" : 10,
+	"isAuthoritative" : true,
+	"label" : "",
+	"min_size" : 0,
+	"max_size" : 4,
+	"query" : "" 
+	}
+	
+	# get the list of matches from nakama
+	match_list = await Rpc.get_matches(payload, logger)
+
+	# loop through the list of matches
+	for m in match_list:
+		# create a new node in the tree of matches
+		var world : TreeItem = match_list_tree.create_item(root)
+		world.set_text(0, m["match_id"])
+		world.set_text(1, str(m["size"]))
+		world.set_text_alignment(1, HORIZONTAL_ALIGNMENT_CENTER)
 
 func _on_return_to_networking_pressed() -> void:
 	# load the networking menu UI model into the scene tree
