@@ -96,7 +96,8 @@ func create_socket(client : NakamaClient, session : NakamaSession, logging : Con
 	
 	if _socket_connected:
 		logging.text = logging.text + "Socket connection succesful!\n"
-		
+		# save the socket
+		_socket = socket
 		# return socket reference to caller
 		return socket
 	
