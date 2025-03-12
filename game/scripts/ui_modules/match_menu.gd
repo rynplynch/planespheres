@@ -76,3 +76,13 @@ func _on_join_world_pressed() -> void:
 		
 		# the index of the selected TreeItem is the same index in the match list
 		var match_id = match_list[selected.get_index()]["match_id"]
+		
+		# grab the socket
+		var socket : NakamaSocket = Networking._socket
+		
+		# attempt to join the match
+		var joined_match = await socket.join_match_async(match_id)
+		
+		# catch the exception
+		if joined_match.is_exception():
+			return
